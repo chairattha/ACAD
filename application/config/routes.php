@@ -64,8 +64,6 @@ $route['profile'] = 'ProfileController/profileIndex';
 
 $route['school'] = 'SchoolController/schoolIndex';
 $route['users'] = 'UserController/usersIndex';
-$route['education-year-semester'] = 'SchoolController/educationYearSemesterIndex';
-// $route['users-form'] = 'UserController/usersFormIndex/$1';
 
 $route['personnel']='PersonnelController/personnelIndex';
 $route['personnel-insert-form']='PersonnelController/personnelInsertForm';
