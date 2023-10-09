@@ -327,6 +327,7 @@ class SetupController extends CI_Controller
         $array = array(
             'school_type_id' => 1,
             'name' => 'โรงเรียนเอแคดศึกษา',
+            'maximum_semester' => 2
         );
 
         $this->db->set($array);
