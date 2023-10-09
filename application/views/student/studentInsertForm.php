@@ -138,7 +138,8 @@
                                 </div>
                             </div>
                             <hr>
-                            <h2 class="card-title mt-4"><b>ข้อมูลที่อยู่ปัจจุบัน</b></h2>
+                            <h2 class="mb-4"><b>Address</b></h2>
+                            <h3 class="card-title mb-4"><b>ข้อมูลที่อยู่ปัจจุบัน</b></h3>
                             <div class="row g-3">
                                 <? php // print_r($row);
                                 ?>
@@ -170,19 +171,19 @@
                                 </div>
                             </div>
 
-                            <h2 class="card-title mt-4"><b>ข้อมูลที่อยู่ตามทะเบียนบ้าน</b></h2>
+                            <h3 class="card-title mt-4"><b>ข้อมูลที่อยู่ตามทะเบียนบ้าน</b></h3>
                             <div class="row g-3">
                                 <div class="col-md">
                                     <?php _label("บ้านเลขที่"); ?>
-                                    <input type="text" class="form-control " id="inR_No" name="inR_No" value="<?php echo (!empty($row["r_address_no"])) ? $row["r_address_no"] : ""; ?>" required />
+                                    <input type="text" class="form-control " id="inR_No" name="inR_No" value="<?php echo (!empty($row["r_address_no"])) ? $row["r_address_no"] : ""; ?>"  />
                                 </div>
                                 <div class="col-md">
                                     <?php _label("หมู่"); ?>
-                                    <input type="text" class="form-control " id="inR_Moo" name="inR_Moo" value="<?php echo (!empty($row["r_address_moo"])) ? $row["r_address_moo"] : ""; ?>" required />
+                                    <input type="text" class="form-control " id="inR_Moo" name="inR_Moo" value="<?php echo (!empty($row["r_address_moo"])) ? $row["r_address_moo"] : ""; ?>"  />
                                 </div>
                                 <div class="col-md">
                                     <?php _label("ตำบล"); ?>
-                                    <input type="text" class="form-control" id="inR_Tambol" name="inR_Tambol" value="<?php echo (!empty($row["r_address_tambol"])) ? $row["r_address_tambol"] : ""; ?>" required />
+                                    <input type="text" class="form-control" id="inR_Tambol" name="inR_Tambol" value="<?php echo (!empty($row["r_address_tambol"])) ? $row["r_address_tambol"] : ""; ?>"  />
                                 </div>
                             </div>
                             <div class="row g-3">
@@ -201,68 +202,72 @@
                             </div>
 
                             <hr>
-                            <h2 class="mb-4">Parent</h2>
-                            <h2 class="card-title mt-4"><b>ข้อมูลบิดา</b></h2>
+                            <h2 class="mb-4"><b>Parent</b></h2>
+
+                            <h3 class="card-title mt-4"><b>ข้อมูลมารดา</b></h3>
                             <div class="row g-3">
-                                <? php // print_r($row);
-                                ?>
+                                <div class="row align-items-center">
+                                <input type='file' id="inParentLogo" style="display:none;" />
+                                <input type='hidden' id="inParentLogo64" name="inParentLogo64" style="display:none;" value="<?php echo (!empty($row["m_profile_image"])) ? $row["m_profile_image"] : ""; ?>" />
+                                <div class="col-auto">
+                                    <span class="avatar avatar-xl" id="logo-image" style="background-image: url('<?php echo (!empty($row["m_profile_image"])) ? $row["m_profile_image"] : ""; ?>');">
+                                    </span>
+                                </div>
+                                <div class="col-auto">
+                                    <a href="#" class="btn" id="btn-change-image">Change avatar</a>
+                                </div>
+                            </div>
                                 <div class="col-md">
                                     <?php _label("title name"); ?>
-                                    <input type="text" class="form-control " id="" name="" value="<?php echo (!empty($row["c_address_no"])) ? $row["c_address_no"] : ""; ?>" />
+                                    <input type="text" class="form-control " id="inM_TitleName" name="inM_TitleName" value="<?php echo (!empty($row["m_titlename"])) ? $row["m_titlename"] : ""; ?>" />
                                 </div>
                                 <div class="col-md">
-                                    <?php _label("Fris tname"); ?>
-                                    <input type="text" class="form-control " id="" name="" value="<?php echo (!empty($row["c_address_moo"])) ? $row["c_address_moo"] : ""; ?>" />
+                                    <?php _label("First name"); ?>
+                                    <input type="text" class="form-control " id="inM_FirstName" name="inM_FirstName" value="<?php echo (!empty($row["m_firstname"])) ? $row["m_firstname"] : ""; ?>" />
                                 </div>
                                 <div class="col-md">
                                     <?php _label("Last name"); ?>
-                                    <input type="text" class="form-control" id="" name="" value="<?php echo (!empty($row["c_address_tambol"])) ? $row["c_address_tambol"] : ""; ?>" />
+                                    <input type="text" class="form-control" id="inM_LastName" name="inM_LastName" value="<?php echo (!empty($row["m_lastname"])) ? $row["m_lastname"] : ""; ?>" />
                                 </div>
-                            </div>
-                            <div class="row g-3">
                                 <div class="col-md">
                                     <?php _label("อำเภอ"); ?>
-                                    <input type="text" class="form-control" id="" name="" value="<?php echo (!empty($row["c_address_amphur"])) ? $row["c_address_amphur"] : ""; ?>" />
-                                </div>
-                                <div class="col-md">
-                                    <?php _label("จังหวัด"); ?>
-                                    <input type="text" class="form-control" id="" name="" value="<?php echo (!empty($row["c_address_province"])) ? $row["c_address_province"] : ""; ?>" />
-                                </div>
-                                <div class="col-md">
-                                    <?php _label("รหัสไปรษณีย์"); ?>
-                                    <input type="text" class="form-control" id="" name="" value="<?php echo (!empty($row["c_address_zipcode"])) ? $row["c_address_zipcode"] : ""; ?>" />
+                                    <input type="text" class="form-control" id="inM_PhoneNumber" name="inM_PhoneNumber" value="<?php echo (!empty($row["m_phonenumber"])) ? $row["m_phonenumber"] : ""; ?>" />
                                 </div>
                             </div>
-
-                            <h2 class="card-title mt-4"><b>ข้อมูลมารดา</b></h2>
+                            
+                            <h3 class="card-title mb-4"><b>ข้อมูลบิดา</b></h3>
                             <div class="row g-3">
-                                <div class="col-md">
-                                    <?php _label("บ้านเลขที่"); ?>
-                                    <input type="text" class="form-control " id="" name="" value="<?php echo (!empty($row["r_address_no"])) ? $row["r_address_no"] : ""; ?>" required />
+                                <? php // print_r($row);
+                                ?>
+                                <div class="row align-items-center">
+                                <input type='file' id="inParentLogo" style="display:none;" />
+                                <input type='hidden' id="inParentLogo64" name="inParentLogo64" style="display:none;" value="<?php echo (!empty($row["f_profile_image"])) ? $row["f_profile_image"] : ""; ?>" />
+                                <div class="col-auto">
+                                    <span class="avatar avatar-xl" id="logo-image" style="background-image: url('<?php echo (!empty($row["f_profile_image"])) ? $row["f_profile_image"] : ""; ?>');">
+                                    </span>
                                 </div>
-                                <div class="col-md">
-                                    <?php _label("หมู่"); ?>
-                                    <input type="text" class="form-control " id="" name="" value="<?php echo (!empty($row["r_address_moo"])) ? $row["r_address_moo"] : ""; ?>" required />
-                                </div>
-                                <div class="col-md">
-                                    <?php _label("ตำบล"); ?>
-                                    <input type="text" class="form-control" id="" name="" value="<?php echo (!empty($row["r_address_tambol"])) ? $row["r_address_tambol"] : ""; ?>" required />
+                                <div class="col-auto">
+                                    <a href="#" class="btn" id="btn-change-image">Change avatar</a>
                                 </div>
                             </div>
-                            <div class="row g-3">
+                                <div class="col-md">
+                                    <?php _label("title name"); ?>
+                                    <input type="text" class="form-control " id="inF_TitleName" name="inF_TitleName" value="<?php echo (!empty($row["f_titlename"])) ? $row["f_titlename"] : ""; ?>" />
+                                </div>
+                                <div class="col-md">
+                                    <?php _label("First name"); ?>
+                                    <input type="text" class="form-control " id="inF_FirstName" name="inF_FirstName" value="<?php echo (!empty($row["f_firstname"])) ? $row["f_firstname"] : ""; ?>" />
+                                </div>
+                                <div class="col-md">
+                                    <?php _label("Last name"); ?>
+                                    <input type="text" class="form-control" id="inF_LastName" name="inF_LastName" value="<?php echo (!empty($row["f_lastname"])) ? $row["f_lastname"] : ""; ?>" />
+                                </div>
                                 <div class="col-md">
                                     <?php _label("อำเภอ"); ?>
-                                    <input type="text" class="form-control" id="" name="" value="<?php echo (!empty($row["r_address_amphur"])) ? $row["r_address_amphur"] : ""; ?>" />
-                                </div>
-                                <div class="col-md">
-                                    <?php _label("จังหวัด"); ?>
-                                    <input type="text" class="form-control" id="" name="" value="<?php echo (!empty($row["r_address_province"])) ? $row["r_address_province"] : ""; ?>" />
-                                </div>
-                                <div class="col-md">
-                                    <?php _label("รหัสไปรษณีย์"); ?>
-                                    <input type="text" class="form-control" id="" name="" value="<?php echo (!empty($row["r_address_zipcode"])) ? $row["r_address_zipcode"] : ""; ?>" />
+                                    <input type="text" class="form-control" id="inF_PhoneNumber" name="inF_PhoneNumber" value="<?php echo (!empty($row["f_phonenumber"])) ? $row["f_phonenumber"] : ""; ?>" />
                                 </div>
                             </div>
+            
                         </div>
                         <div class="card-footer bg-transparent mt-auto">
                             <div class="btn-list justify-content-end">

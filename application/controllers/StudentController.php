@@ -57,7 +57,21 @@ class StudentController extends CI_Controller
             "r_tambol" => $this->input->post("inR_Tambol"),
             "r_amphur" => $this->input->post("inR_AmPhur"),
             "r_province" => $this->input->post("inR_Province"),
-            "r_zipcode" => $this->input->post("inR_ZipCode")
+            "r_zipcode" => $this->input->post("inR_ZipCode"),
+
+             
+             "f_titlename" => $this->input->post("inF_TitleName"),
+             "f_firstname" => $this->input->post("inF_FirstName"),
+             "f_lastname" => $this->input->post("inF_LastName"),
+             "f_profile_image" => $this->input->post("inParentLogo64"),
+             "f_phonenumber" => $this->input->post("inF_PhoneNumber"),
+ 
+            
+             "m_titlename" => $this->input->post("inF_TitleName"),
+             "m_firstname" => $this->input->post("inF_FirstName"),
+             "m_lastname" => $this->input->post("inF_LastName"),
+             "m_profile_image" => $this->input->post("inParentLogo64"),
+             "m_phonenumber" => $this->input->post("inF_PhoneNumber")
         );
         $this->StudentModel->insert_student($arr);
     }
@@ -72,6 +86,7 @@ class StudentController extends CI_Controller
 
     public function update_student()
     {
+        #ข้อมูลนักเรียน
         $arr = array(
             "school_id" => $this->session->userdata("userSchoolId"),
             "profileimage" => $this->input->post("inStudentLogo64"),
@@ -87,7 +102,8 @@ class StudentController extends CI_Controller
             "religion" => $this->input->post("inReligion"),
             "ethnicity" => $this->input->post("inEthnicity"),
             "nationality" => $this->input->post("inNationality"),
-            
+
+            #ข้อมูลที่อยู่ปัจจุบัน
             "c_no" => $this->input->post("inC_No"),
             "c_moo" => $this->input->post("inC_Moo"),
             "c_tambol" => $this->input->post("inC_Tambol"),
@@ -95,12 +111,27 @@ class StudentController extends CI_Controller
             "c_province" => $this->input->post("inC_Province"),
             "c_zipcode" => $this->input->post("inC_ZipCode"),
 
+            #ข้อมูลที่อยู่ตามทะเบียนบ้าน
             "r_no" => $this->input->post("inR_No"),
             "r_moo" => $this->input->post("inR_Moo"),
             "r_tambol" => $this->input->post("inR_Tambol"),
             "r_amphur" => $this->input->post("inR_AmPhur"),
             "r_province" => $this->input->post("inR_Province"),
-            "r_zipcode" => $this->input->post("inR_ZipCode")
+            "r_zipcode" => $this->input->post("inR_ZipCode"),
+
+            #ข้อมูลพื้นฐานพ่อ
+            "f_titlename" => $this->input->post("inF_TitleName"),
+            "f_firstname" => $this->input->post("inF_FirstName"),
+            "f_lastname" => $this->input->post("inF_LastName"),
+            "f_profile_image" => $this->input->post("inParentLogo64"),
+            "f_phonenumber" => $this->input->post("inF_PhoneNumber"),
+
+            #ข้อมูลพื้นฐานแม่
+            "m_titlename" => $this->input->post("inF_TitleName"),
+            "m_firstname" => $this->input->post("inF_FirstName"),
+            "m_lastname" => $this->input->post("inF_LastName"),
+            "m_profile_image" => $this->input->post("inParentLogo64"),
+            "m_phonenumber" => $this->input->post("inF_PhoneNumber")
         );
         $this->StudentModel->update_student($arr, $this->input->post("inStdId"));
     }
