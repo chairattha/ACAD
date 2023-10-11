@@ -40,7 +40,7 @@ class StudentModel extends CI_Model
     function get_parent_by_stdid($std_id, $relation)
     {
         if (!empty($std_id)) {
-            $this->db->select('a.*,b.relation');
+            $this->db->select('a.*,a.id as parent_id,b.relation');
             $this->db->from('tb_parent a');
             $this->db->join('tb_student_parent b', 'b.parent_id = a.id');
             $this->db->where('b.student_id', $std_id);
@@ -52,10 +52,11 @@ class StudentModel extends CI_Model
         }
     }
 
-    public function insert_student($data)
+    public function update_student($data, $std_id = null)
     {
         $this->db->trans_begin();
 
+        #ข้อมูลนักเรียน
         $student = array(
             "titlename" => $data["titlename"],
             "firstname" => $data["firstname"],
@@ -70,34 +71,26 @@ class StudentModel extends CI_Model
             "religion" => $data["religion"],
             "ethnicity" => $data["ethnicity"],
             "nationality" => $data["nationality"],
-            "created_at" => strtotime(date("Y-m-d h:i:s")),
             "updated_at" => strtotime(date("Y-m-d h:i:s"))
         );
-        $this->db->insert('tb_student', $student);
-        $std_id = $this->db->insert_id();
 
-        $student = array(
-            "student_id" => $std_id,
-            "school_id" => $data["school_id"],
-            "status" => "Studying",
-            "date" => strtotime(date("Y-m-d")),
-            "note" => "insert by student web"
-        );
-        $this->db->insert('tb_student_register', $student);
+        if (!empty($std_id)) {
+            $this->db->where('id', $std_id);
+            $this->db->update('tb_student', $student);
+        } else {
+            $student["created_at"] = strtotime(date("Y-m-d"));
+            $this->db->insert('tb_student', $student);
+            $std_id = $this->db->insert_id();
 
-        #ข้อมูลที่อยู่ปัจจุบัน
-        $c_address = array(
-            "student_id" => $std_id,
-            "no" => $data["c_no"],
-            "moo" => $data["c_moo"],
-            "tambol" => $data["c_tambol"],
-            "amphur" => $data["c_amphur"],
-            "province" => $data["c_province"],
-            "zipcode" => $data["c_zipcode"],
-            "created_at" => strtotime(date("Y-m-d")),
-            "updated_at" => strtotime(date("Y-m-d"))
-        );
-        $this->db->insert('tb_student_current_address', $c_address);
+            $student = array(
+                "student_id" => $std_id,
+                "school_id" => $data["school_id"],
+                "status" => "Studying",
+                "date" => strtotime(date("Y-m-d")),
+                "note" => "insert by student web"
+            );
+            $this->db->insert('tb_student_register', $student);
+        }
 
         #ข้อมูลที่อยู่ตามทะเบียนบ้าน
         $r_address = array(
@@ -108,10 +101,36 @@ class StudentModel extends CI_Model
             "amphur" => $data["r_amphur"],
             "province" => $data["r_province"],
             "zipcode" => $data["r_zipcode"],
-            "created_at" => strtotime(date("Y-m-d")),
             "updated_at" => strtotime(date("Y-m-d"))
         );
-        $this->db->insert('tb_student_registered_address', $r_address);
+        $chk = $this->db->select('id')->from('tb_student_registered_address')->where('student_id', $std_id)->get()->row_array();
+        if (!empty($chk['id'])) {
+            $this->db->where('student_id', $std_id);
+            $this->db->update('tb_student_registered_address', $r_address);
+        } else {
+            $r_address["created_at"] = strtotime(date("Y-m-d"));
+            $this->db->insert('tb_student_registered_address', $r_address);
+        }
+
+        #ข้อมูลที่อยู่ปัจจุบัน
+        $c_address = array(
+            "student_id" => $std_id,
+            "no" => $data["c_no"],
+            "moo" => $data["c_moo"],
+            "tambol" => $data["c_tambol"],
+            "amphur" => $data["c_amphur"],
+            "province" => $data["c_province"],
+            "zipcode" => $data["c_zipcode"],
+            "updated_at" => strtotime(date("Y-m-d"))
+        );
+        $chk = $this->db->select('id')->from('tb_student_current_address')->where('student_id', $std_id)->get()->row_array();
+        if (!empty($chk['id'])) {
+            $this->db->where('student_id', $std_id);
+            $this->db->update('tb_student_current_address', $c_address);
+        } else {
+            $c_address["created_at"] = strtotime(date("Y-m-d"));
+            $this->db->insert('tb_student_current_address', $c_address);
+        }
 
         #ข้อมูลพื้นฐานพ่อ
         $father = array(
@@ -120,19 +139,27 @@ class StudentModel extends CI_Model
             "lastname" => $data["f_lastname"],
             "profile_image" => $data["f_profile_image"],
             "phonenumber" => $data["f_phonenumber"],
-            "created_at" => strtotime(date("Y-m-d")),
             "updated_at" => strtotime(date("Y-m-d"))
         );
-        $father_id = $this->db->insert('tb_parent', $father);
-        #พ่อผูกข้อมูลเด็ก
-        $father_relation = array(
-            "student_id" => $std_id,
-            "parent_id" => $father_id,
-            "relation" => "พ่อ",
-            "created_at" => strtotime(date("Y-m-d")),
-            "updated_at" => strtotime(date("Y-m-d"))
-        );
-        $this->db->insert('tb_student_parent', $father_relation);
+        $chk_father = $this->get_parent_by_stdid($std_id, 'พ่อ');
+        $father_id = $chk_father["parent_id"];
+        if (!empty($father_id)) {
+            $this->db->where('id', $father_id);
+            $this->db->update('tb_parent', $father);
+        } else {
+            $father["created_at"] = strtotime(date("Y-m-d"));
+            $this->db->insert('tb_parent', $father);
+            $father_id = $this->db->insert_id();
+
+            #พ่อผูกข้อมูลเด็ก
+            $father_relation = array(
+                "student_id" => $std_id,
+                "parent_id" => $father_id,
+                "relation" => "พ่อ",
+                "updated_at" => strtotime(date("Y-m-d"))
+            );
+            $this->db->insert('tb_student_parent', $father_relation);
+        }
 
         #ข้อมูลพื้นฐานแม่
         $mother = array(
@@ -141,79 +168,28 @@ class StudentModel extends CI_Model
             "lastname" => $data["m_lastname"],
             "profile_image" => $data["m_profile_image"],
             "phonenumber" => $data["m_phonenumber"],
-            "created_at" => strtotime(date("Y-m-d")),
             "updated_at" => strtotime(date("Y-m-d"))
         );
-        $mother_id = $this->db->insert('tb_parent', $mother);
-        #แม่ผูกข้อมูลเด็ก
-        $mother_relation = array(
-            "student_id" => $std_id,
-            "parent_id" => $mother_id,
-            "relation" => "แม่",
-            "created_at" => strtotime(date("Y-m-d")),
-            "updated_at" => strtotime(date("Y-m-d"))
-        );
-        $this->db->insert('tb_student_parent', $mother_relation);
-
-        if ($this->db->trans_status() === FALSE) {
-            $this->db->trans_rollback();
-            return "rollback";
+        $chk_mother = $this->get_parent_by_stdid($std_id, 'แม่');
+        $mother_id = $chk_mother["parent_id"];
+        if (!empty($mother_id)) {
+            $this->db->where('id', $mother_id);
+            $this->db->update('tb_parent', $mother);
         } else {
-            $this->db->trans_commit();
-            return "success";
+            $mother["created_at"] = strtotime(date("Y-m-d"));
+            $this->db->insert('tb_parent', $mother);
+            $mother_id = $this->db->insert_id();
+
+            #แม่ผูกข้อมูลเด็ก
+            $mother_relation = array(
+                "student_id" => $std_id,
+                "parent_id" => $mother_id,
+                "relation" => "แม่",
+                "updated_at" => strtotime(date("Y-m-d"))
+            );
+            $this->db->insert('tb_student_parent', $mother_relation);
         }
-    }
 
-    public function update_student($data, $std_id)
-    {
-        $this->db->trans_begin();
-
-        $student = array(
-            "titlename" => $data["titlename"],
-            "firstname" => $data["firstname"],
-            "lastname" => $data["lastname"],
-            "idcard" => $data["idcard"],
-            "profileimage" => $data["profileimage"],
-            "nickname" => $data["nickname"],
-            "gender" => $data["gender"],
-            "birthdate" => strtotime($data["birthdate"]),
-            "bloodtype" => $data["bloodtype"],
-            "phonenumber" => $data["phonenumber"],
-            "religion" => $data["religion"],
-            "ethnicity" => $data["ethnicity"],
-            "nationality" => $data["nationality"],
-            "updated_at" => strtotime(date("Y-m-d h:i:s"))
-        );
-        $this->db->where('id', $std_id);
-        $this->db->update('tb_student', $student);
-
-        #ข้อมูลที่อยู่ปัจจุบัน
-        $c_address = array(
-            "student_id" => $std_id,
-            "no" => $data["c_no"],
-            "moo" => $data["c_moo"],
-            "tambol" => $data["c_tambol"],
-            "amphur" => $data["c_amphur"],
-            "province" => $data["c_province"],
-            "zipcode" => $data["c_zipcode"],
-            "updated_at" => strtotime(date("Y-m-d"))
-        );
-        $this->db->where('student_id', $std_id);
-        $this->db->update('tb_student_current_address', $c_address);
-
-        #ข้อมูลที่อยู่ตามทะเบียนบ้าน
-        $r_address = array(
-            "student_id" => $std_id,
-            "no" => $data["r_no"],
-            "moo" => $data["r_moo"],
-            "tambol" => $data["r_tambol"],
-            "amphur" => $data["r_amphur"],
-            "province" => $data["r_province"],
-            "zipcode" => $data["r_zipcode"],
-            "updated_at" => strtotime(date("Y-m-d"))
-        );
-        $this->db->where('student_id', $std_id);
-        $this->db->update('tb_student_registered_address', $r_address);
 
         if ($this->db->trans_status() === FALSE) {
             $this->db->trans_rollback();
