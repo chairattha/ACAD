@@ -19,7 +19,6 @@
                 <div class="col d-flex flex-column">
                     <form id="insert-form" method="post" autocomplete="off" enctype="multipart/form-data">
                         <input type="hidden" id="inStdId" name="inStdId" value="<?php echo (!empty($this->uri->segment(2))) ? $this->uri->segment(2) : ""; ?>" />
-
                         <div class="card-body">
                             <h2 class="mb-4">Student</h2>
                             <h3 class="card-title">User Image</h3>
@@ -53,7 +52,7 @@
                                 </div>
                                 <div class="col-md">
                                     <?php _label("Last Name"); ?>
-                                    <input type="text" class="form-control" id="inLastName" name="inLastName" value="<?php echo (!empty($row["lastname"])) ? $row["lastname"] : ""; ?>" required />
+                                    <input type="text" class="form-control" id="inLastName" name="inLastName" value="<?php echo (!empty($row["lastname"])) ? $row["lastname"] : ""; ?>" />
                                 </div>
                                 <div class="col-md">
                                     <?php _label("Nick Name"); ?>
@@ -137,150 +136,226 @@
                                     <input type="text" class="form-control" id="inPhoneNumber" name="inPhoneNumber" value="<?php echo (!empty($row["phonenumber"])) ? $row["phonenumber"] : ""; ?>" />
                                 </div>
                             </div>
+                            <!-- Form Address -->
                             <hr>
-                            <h2 class="mb-4"><b>Address</b></h2>
-                            <h3 class="card-title mb-4"><b>ข้อมูลที่อยู่ปัจจุบัน</b></h3>
-                            <div class="row g-3">
-                                <? php // print_r($row);
+                            <h3 class="card-title mt-4">Address Information</h4>
+                                <h4>*ที่อยู่ตามทะเบียนบ้าน</h4>
+                                <div class="row g-3">
+                                    <div class="col-md">
+                                        <?php _label("บ้านเลขที่"); ?>
+                                        <input type="text" class="form-control " id="inR_No" name="inR_No" value="<?php echo (!empty($row["r_address_no"])) ? $row["r_address_no"] : ""; ?>" />
+                                    </div>
+                                    <div class="col-md">
+                                        <?php _label("หมู่"); ?>
+                                        <input type="text" class="form-control " id="inR_Moo" name="inR_Moo" value="<?php echo (!empty($row["r_address_moo"])) ? $row["r_address_moo"] : ""; ?>" />
+                                    </div>
+                                    <div class="col-md">
+                                        <?php _label("ตำบล"); ?>
+                                        <input type="text" class="form-control" id="inR_Tambol" name="inR_Tambol" value="<?php echo (!empty($row["r_address_tambol"])) ? $row["r_address_tambol"] : ""; ?>" />
+                                    </div>
+                                </div>
+                                <div class="row g-3">
+                                    <div class="col-md">
+                                        <?php _label("อำเภอ"); ?>
+                                        <input type="text" class="form-control" id="inR_AmPhur" name="inR_AmPhur" value="<?php echo (!empty($row["r_address_amphur"])) ? $row["r_address_amphur"] : ""; ?>" />
+                                    </div>
+                                    <div class="col-md">
+                                        <?php _label("จังหวัด"); ?>
+                                        <input type="text" class="form-control" id="inR_Province" name="inR_Province" value="<?php echo (!empty($row["r_address_province"])) ? $row["r_address_province"] : ""; ?>" />
+                                    </div>
+                                    <div class="col-md">
+                                        <?php _label("รหัสไปรษณีย์"); ?>
+                                        <input type="text" class="form-control" id="inR_ZipCode" name="inR_ZipCode" value="<?php echo (!empty($row["r_address_zipcode"])) ? $row["r_address_zipcode"] : ""; ?>" />
+                                    </div>
+                                </div>
+
+                                
+                                <h4 class="mt-4">*ที่อยู่ปัจจุบัน 
+
+                                
+                                </h4>
+                                <label class="form-check">
+                                    <input class="form-check-input" id="inAddCheck" type="checkbox">
+                                    <span class="form-check-label">ที่อยู่ปัจจุบันตรงกับทะเบียนบ้าน</span>
+                                </label>
+                                <? //php  print_r($row);
                                 ?>
-                                <div class="col-md">
-                                    <?php _label("บ้านเลขที่"); ?>
-                                    <input type="text" class="form-control " id="inC_No" name="inC_No" value="<?php echo (!empty($row["c_address_no"])) ? $row["c_address_no"] : ""; ?>" />
-                                </div>
-                                <div class="col-md">
-                                    <?php _label("หมู่"); ?>
-                                    <input type="text" class="form-control " id="inC_Moo" name="inC_Moo" value="<?php echo (!empty($row["c_address_moo"])) ? $row["c_address_moo"] : ""; ?>" />
-                                </div>
-                                <div class="col-md">
-                                    <?php _label("ตำบล"); ?>
-                                    <input type="text" class="form-control" id="inC_Tambol" name="inC_Tambol" value="<?php echo (!empty($row["c_address_tambol"])) ? $row["c_address_tambol"] : ""; ?>" />
-                                </div>
-                            </div>
-                            <div class="row g-3">
-                                <div class="col-md">
-                                    <?php _label("อำเภอ"); ?>
-                                    <input type="text" class="form-control" id="inC_AmPhur" name="inC_AmPhur" value="<?php echo (!empty($row["c_address_amphur"])) ? $row["c_address_amphur"] : ""; ?>" />
-                                </div>
-                                <div class="col-md">
-                                    <?php _label("จังหวัด"); ?>
-                                    <input type="text" class="form-control" id="inC_Province" name="inC_Province" value="<?php echo (!empty($row["c_address_province"])) ? $row["c_address_province"] : ""; ?>" />
-                                </div>
-                                <div class="col-md">
-                                    <?php _label("รหัสไปรษณีย์"); ?>
-                                    <input type="text" class="form-control" id="inC_ZipCode" name="inC_ZipCode" value="<?php echo (!empty($row["c_address_zipcode"])) ? $row["c_address_zipcode"] : ""; ?>" />
-                                </div>
-                            </div>
+                                <div class="row g-3">
 
-                            <h3 class="card-title mt-4"><b>ข้อมูลที่อยู่ตามทะเบียนบ้าน</b></h3>
-                            <div class="row g-3">
-                                <div class="col-md">
-                                    <?php _label("บ้านเลขที่"); ?>
-                                    <input type="text" class="form-control " id="inR_No" name="inR_No" value="<?php echo (!empty($row["r_address_no"])) ? $row["r_address_no"] : ""; ?>"  />
+                                    <div class="col-md">
+                                        <?php _label("บ้านเลขที่"); ?>
+                                        <input type="text" class="form-control " id="inC_No" name="inC_No" value="<?php echo (!empty($row["c_address_no"])) ? $row["c_address_no"] : ""; ?>" />
+                                    </div>
+                                    <div class="col-md">
+                                        <?php _label("หมู่"); ?>
+                                        <input type="text" class="form-control " id="inC_Moo" name="inC_Moo" value="<?php echo (!empty($row["c_address_moo"])) ? $row["c_address_moo"] : ""; ?>" />
+                                    </div>
+                                    <div class="col-md">
+                                        <?php _label("ตำบล"); ?>
+                                        <input type="text" class="form-control" id="inC_Tambol" name="inC_Tambol" value="<?php echo (!empty($row["c_address_tambol"])) ? $row["c_address_tambol"] : ""; ?>" />
+                                    </div>
                                 </div>
-                                <div class="col-md">
-                                    <?php _label("หมู่"); ?>
-                                    <input type="text" class="form-control " id="inR_Moo" name="inR_Moo" value="<?php echo (!empty($row["r_address_moo"])) ? $row["r_address_moo"] : ""; ?>"  />
+                                <div class="row g-3">
+                                    <div class="col-md">
+                                        <?php _label("อำเภอ"); ?>
+                                        <input type="text" class="form-control" id="inC_AmPhur" name="inC_AmPhur" value="<?php echo (!empty($row["c_address_amphur"])) ? $row["c_address_amphur"] : ""; ?>" />
+                                    </div>
+                                    <div class="col-md">
+                                        <?php _label("จังหวัด"); ?>
+                                        <input type="text" class="form-control" id="inC_Province" name="inC_Province" value="<?php echo (!empty($row["c_address_province"])) ? $row["c_address_province"] : ""; ?>" />
+                                    </div>
+                                    <div class="col-md">
+                                        <?php _label("รหัสไปรษณีย์"); ?>
+                                        <input type="text" class="form-control" id="inC_ZipCode" name="inC_ZipCode" value="<?php echo (!empty($row["c_address_zipcode"])) ? $row["c_address_zipcode"] : ""; ?>" />
+                                    </div>
                                 </div>
-                                <div class="col-md">
-                                    <?php _label("ตำบล"); ?>
-                                    <input type="text" class="form-control" id="inR_Tambol" name="inR_Tambol" value="<?php echo (!empty($row["r_address_tambol"])) ? $row["r_address_tambol"] : ""; ?>"  />
-                                </div>
-                            </div>
-                            <div class="row g-3">
-                                <div class="col-md">
-                                    <?php _label("อำเภอ"); ?>
-                                    <input type="text" class="form-control" id="inR_AmPhur" name="inR_AmPhur" value="<?php echo (!empty($row["r_address_amphur"])) ? $row["r_address_amphur"] : ""; ?>" />
-                                </div>
-                                <div class="col-md">
-                                    <?php _label("จังหวัด"); ?>
-                                    <input type="text" class="form-control" id="inR_Province" name="inR_Province" value="<?php echo (!empty($row["r_address_province"])) ? $row["r_address_province"] : ""; ?>" />
-                                </div>
-                                <div class="col-md">
-                                    <?php _label("รหัสไปรษณีย์"); ?>
-                                    <input type="text" class="form-control" id="inR_ZipCode" name="inR_ZipCode" value="<?php echo (!empty($row["r_address_zipcode"])) ? $row["r_address_zipcode"] : ""; ?>" />
-                                </div>
-                            </div>
 
-                            <hr>
-                            <h2 class="mb-4"><b>Parent</b></h2>
 
-                            <h3 class="card-title mt-4"><b>ข้อมูลมารดา</b></h3>
-                            <div class="row g-3">
-                                <div class="row align-items-center">
-                                <input type='file' id="inParentLogo" style="display:none;" />
-                                <input type='hidden' id="inParentLogo64" name="inParentLogo64" style="display:none;" value="<?php echo (!empty($row["m_profile_image"])) ? $row["m_profile_image"] : ""; ?>" />
-                                <div class="col-auto">
-                                    <span class="avatar avatar-xl" id="logo-image" style="background-image: url('<?php echo (!empty($row["m_profile_image"])) ? $row["m_profile_image"] : ""; ?>');">
-                                    </span>
-                                </div>
-                                <div class="col-auto">
-                                    <a href="#" class="btn" id="btn-change-image">Change avatar</a>
-                                </div>
-                            </div>
-                                <div class="col-md">
-                                    <?php _label("title name"); ?>
-                                    <input type="text" class="form-control " id="inM_TitleName" name="inM_TitleName" value="<?php echo (!empty($row["m_titlename"])) ? $row["m_titlename"] : ""; ?>" />
-                                </div>
-                                <div class="col-md">
-                                    <?php _label("First name"); ?>
-                                    <input type="text" class="form-control " id="inM_FirstName" name="inM_FirstName" value="<?php echo (!empty($row["m_firstname"])) ? $row["m_firstname"] : ""; ?>" />
-                                </div>
-                                <div class="col-md">
-                                    <?php _label("Last name"); ?>
-                                    <input type="text" class="form-control" id="inM_LastName" name="inM_LastName" value="<?php echo (!empty($row["m_lastname"])) ? $row["m_lastname"] : ""; ?>" />
-                                </div>
-                                <div class="col-md">
-                                    <?php _label("อำเภอ"); ?>
-                                    <input type="text" class="form-control" id="inM_PhoneNumber" name="inM_PhoneNumber" value="<?php echo (!empty($row["m_phonenumber"])) ? $row["m_phonenumber"] : ""; ?>" />
-                                </div>
-                            </div>
-                            
-                            <h3 class="card-title mb-4"><b>ข้อมูลบิดา</b></h3>
-                            <div class="row g-3">
-                                <? php // print_r($row);
-                                ?>
-                                <div class="row align-items-center">
-                                <input type='file' id="inParentLogo" style="display:none;" />
-                                <input type='hidden' id="inParentLogo64" name="inParentLogo64" style="display:none;" value="<?php echo (!empty($row["f_profile_image"])) ? $row["f_profile_image"] : ""; ?>" />
-                                <div class="col-auto">
-                                    <span class="avatar avatar-xl" id="logo-image" style="background-image: url('<?php echo (!empty($row["f_profile_image"])) ? $row["f_profile_image"] : ""; ?>');">
-                                    </span>
-                                </div>
-                                <div class="col-auto">
-                                    <a href="#" class="btn" id="btn-change-image">Change avatar</a>
-                                </div>
-                            </div>
-                                <div class="col-md">
-                                    <?php _label("title name"); ?>
-                                    <input type="text" class="form-control " id="inF_TitleName" name="inF_TitleName" value="<?php echo (!empty($row["f_titlename"])) ? $row["f_titlename"] : ""; ?>" />
-                                </div>
-                                <div class="col-md">
-                                    <?php _label("First name"); ?>
-                                    <input type="text" class="form-control " id="inF_FirstName" name="inF_FirstName" value="<?php echo (!empty($row["f_firstname"])) ? $row["f_firstname"] : ""; ?>" />
-                                </div>
-                                <div class="col-md">
-                                    <?php _label("Last name"); ?>
-                                    <input type="text" class="form-control" id="inF_LastName" name="inF_LastName" value="<?php echo (!empty($row["f_lastname"])) ? $row["f_lastname"] : ""; ?>" />
-                                </div>
-                                <div class="col-md">
-                                    <?php _label("อำเภอ"); ?>
-                                    <input type="text" class="form-control" id="inF_PhoneNumber" name="inF_PhoneNumber" value="<?php echo (!empty($row["f_phonenumber"])) ? $row["f_phonenumber"] : ""; ?>" />
-                                </div>
-                            </div>
-            
-                        </div>
-                        <div class="card-footer bg-transparent mt-auto">
-                            <div class="btn-list justify-content-end">
-                                <button type="submit" class="btn btn-primary">Submit</button>
-                            </div>
-                        </div>
+                                <!-- Form Paren -->
+                                <hr>
+                                <h3 class="card-title mt-4">Paren Information</h3>
+                                <div class="accordion" id="accordion-example">
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="heading-1">
+                                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-1" aria-expanded="true">
+                                                <h4>*ข้อมูลบิดา</h4>
+                                            </button>
+                                        </h2>
+                                        <div id="collapse-1" class="accordion-collapse collapse show" data-bs-parent="#accordion-example" style="">
+                                            <div class="accordion-body pt-0">
+                                                <h3 class="card-title">Paren Image</h3>
+                                                <div class="row g-3">
+                                                    <?  // print_r($row);
+                                                    ?>
+                                                    <div class="row align-items-center">
+                                                        <input type='file' id="inParentLogo" style="display:none;" />
+                                                        <input type='hidden' id="inParentLogo64" name="inParentLogo64" style="display:none;" value="<?php echo (!empty($row["f_profile_image"])) ? $row["f_profile_image"] : ""; ?>" />
+                                                        <div class="col-auto">
+                                                            <span class="avatar avatar-xl" id="logo-image" style="background-image: url('<?php echo (!empty($row["f_profile_image"])) ? $row["f_profile_image"] : ""; ?>');">
+                                                            </span>
+                                                        </div>
+                                                        <div class="col-auto">
+                                                            <a href="#" class="btn" id="btn-change-image">Change avatar</a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row g-3">
+                                                        <div class="col-md">
+                                                            <?php _label("title name"); ?>
+                                                            <input type="text" class="form-control " id="inF_TitleName" name="inF_TitleName" value="<?php echo (!empty($row["f_titlename"])) ? $row["f_titlename"] : ""; ?>" />
+                                                        </div>
+                                                        <div class="col-md">
+                                                            <?php _label("First name"); ?>
+                                                            <input type="text" class="form-control " id="inF_FirstName" name="inF_FirstName" value="<?php echo (!empty($row["f_firstname"])) ? $row["f_firstname"] : ""; ?>" />
+                                                        </div>
+                                                        <div class="col-md">
+                                                            <?php _label("Last name"); ?>
+                                                            <input type="text" class="form-control" id="inF_LastName" name="inF_LastName" value="<?php echo (!empty($row["f_lastname"])) ? $row["f_lastname"] : ""; ?>" />
+                                                        </div>
+                                                        <div class="col-md">
+                                                            <?php _label("Phone"); ?>
+                                                            <input type="text" class="form-control" id="inF_PhoneNumber" name="inF_PhoneNumber" value="<?php echo (!empty($row["f_phonenumber"])) ? $row["f_phonenumber"] : ""; ?>" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header" id="heading-2">
+                                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-2" aria-expanded="false">
+                                                    <h4>*ข้อมูลมารดา</h4>
+                                                </button>
+                                            </h2>
+                                            <div id="collapse-2" class="accordion-collapse collapse" data-bs-parent="#accordion-example" style="">
+                                                <div class="accordion-body pt-0">
+                                                    <h3 class="card-title">Paren Image</h3>
+                                                    <div class="row g-3">
+                                                        <div class="row align-items-center">
+                                                            <input type='file' id="inParentLogo" style="display:none;" />
+                                                            <input type='hidden' id="inParentLogo64" name="inParentLogo64" style="display:none;" value="<?php echo (!empty($row["m_profile_image"])) ? $row["m_profile_image"] : ""; ?>" />
+                                                            <div class="col-auto">
+                                                                <span class="avatar avatar-xl" id="logo-image" style="background-image: url('<?php echo (!empty($row["m_profile_image"])) ? $row["m_profile_image"] : ""; ?>');">
+                                                                </span>
+                                                            </div>
+                                                            <div class="col-auto">
+                                                                <a href="#" class="btn" id="btn-change-image">Change avatar</a>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row g-3">
+                                                            <div class="col-md">
+                                                                <?php _label("title name"); ?>
+                                                                <input type="text" class="form-control " id="inM_TitleName" name="inM_TitleName" value="<?php echo (!empty($row["m_titlename"])) ? $row["m_titlename"] : ""; ?>" />
+                                                            </div>
+                                                            <div class="col-md">
+                                                                <?php _label("First name"); ?>
+                                                                <input type="text" class="form-control " id="inM_FirstName" name="inM_FirstName" value="<?php echo (!empty($row["m_firstname"])) ? $row["m_firstname"] : ""; ?>" />
+                                                            </div>
+                                                            <div class="col-md">
+                                                                <?php _label("Last name"); ?>
+                                                                <input type="text" class="form-control" id="inM_LastName" name="inM_LastName" value="<?php echo (!empty($row["m_lastname"])) ? $row["m_lastname"] : ""; ?>" />
+                                                            </div>
+                                                            <div class="col-md">
+                                                                <?php _label("Phone"); ?>
+                                                                <input type="text" class="form-control" id="inM_PhoneNumber" name="inM_PhoneNumber" value="<?php echo (!empty($row["m_phonenumber"])) ? $row["m_phonenumber"] : ""; ?>" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="accordion-item">
+                                                <h2 class="accordion-header" id="heading-3">
+                                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-3" aria-expanded="false">
+                                                        <h4>*ผู้ปกครองไม่ใช่ บิดา-มารดา</h4>
+                                                    </button>
+                                                </h2>
+                                                <div id="collapse-3" class="accordion-collapse collapse" data-bs-parent="#accordion-example" style="">
+                                                    <div class="accordion-body pt-0">
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+
+                                        </div>
+                                        <div class="card-footer bg-transparent mt-auto">
+                                            <div class="btn-list justify-content-end">
+                                                <button type="submit" class="btn btn-primary">Submit</button>
+                                            </div>
+                                        </div>
                     </form>
+
+
+
+
+                    <input id="a" type=text>
+                    <input id="b" type=text>
+                    <input id="c" type=text>
+                    <input id="d" type=text>
+                    <hr />
+                    <input id="a1" type=text>
+                    <input id="b2" type=text>
+                    <input id="c3" type=text>
+                    <input id="d4" type=text>
                 </div>
             </div>
         </div>
     </div>
 </div>
 <script>
+    $("#inAddCheck").change(function() {
+        if (this.checked) {
+            $("#inC_No").val($("#inR_No").val());
+        }
+    });
+
+
+    // $("#copy").click(function() {
+
+
+    // });
+
+
     $("#btn-change-image").click(function() {
         $('#inStudentLogo').trigger('click');
     });
