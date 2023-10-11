@@ -91,6 +91,7 @@ class StudentModel extends CI_Model
             );
             $this->db->insert('tb_student_register', $student);
         }
+        $this->db->reset_query();
 
         #ข้อมูลที่อยู่ตามทะเบียนบ้าน
         $r_address = array(
@@ -111,6 +112,7 @@ class StudentModel extends CI_Model
             $r_address["created_at"] = strtotime(date("Y-m-d"));
             $this->db->insert('tb_student_registered_address', $r_address);
         }
+        $this->db->reset_query();
 
         #ข้อมูลที่อยู่ปัจจุบัน
         $c_address = array(
@@ -131,6 +133,7 @@ class StudentModel extends CI_Model
             $c_address["created_at"] = strtotime(date("Y-m-d"));
             $this->db->insert('tb_student_current_address', $c_address);
         }
+        $this->db->reset_query();
 
         #ข้อมูลพื้นฐานพ่อ
         $father = array(
@@ -160,6 +163,7 @@ class StudentModel extends CI_Model
             );
             $this->db->insert('tb_student_parent', $father_relation);
         }
+        $this->db->reset_query();
 
         #ข้อมูลพื้นฐานแม่
         $mother = array(
@@ -189,7 +193,7 @@ class StudentModel extends CI_Model
             );
             $this->db->insert('tb_student_parent', $mother_relation);
         }
-
+        $this->db->reset_query();
 
         if ($this->db->trans_status() === FALSE) {
             $this->db->trans_rollback();
