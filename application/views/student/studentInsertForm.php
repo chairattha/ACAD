@@ -52,7 +52,7 @@
                                 </div>
                                 <div class="col-md">
                                     <?php _label("Last Name"); ?>
-                                    <input type="text" class="form-control" id="inLastName" name="inLastName" value="<?php echo (!empty($row["lastname"])) ? $row["lastname"] : ""; ?>" />
+                                    <input type="text" class="form-control" id="inLastName" name="inLastName" value="<?php echo (!empty($row["lastname"])) ? $row["lastname"] : ""; ?>" required/>
                                 </div>
                                 <div class="col-md">
                                     <?php _label("Nick Name"); ?>
@@ -169,11 +169,8 @@
                                     </div>
                                 </div>
 
-                                
-                                <h4 class="mt-4">*ที่อยู่ปัจจุบัน 
 
-                                
-                                </h4>
+                                <h4 class="mt-4">*ที่อยู่ปัจจุบัน</h4>
                                 <label class="form-check">
                                     <input class="form-check-input" id="inAddCheck" type="checkbox">
                                     <span class="form-check-label">ที่อยู่ปัจจุบันตรงกับทะเบียนบ้าน</span>
@@ -198,11 +195,11 @@
                                 <div class="row g-3">
                                     <div class="col-md">
                                         <?php _label("อำเภอ"); ?>
-                                        <input type="text" class="form-control" id="inC_AmPhur" name="inC_AmPhur" value="<?php echo (!empty($row["c_address_amphur"])) ? $row["c_address_amphur"] : ""; ?>" />
+                                        <input type="text" class="form-control" id="inC_AmPhur" name="inC_AmPhur" value="<?php echo (!empty($row["c_address_amphur"])) ? $row["c_address_amphur"] : ""; ?>" required/>
                                     </div>
                                     <div class="col-md">
                                         <?php _label("จังหวัด"); ?>
-                                        <input type="text" class="form-control" id="inC_Province" name="inC_Province" value="<?php echo (!empty($row["c_address_province"])) ? $row["c_address_province"] : ""; ?>" />
+                                        <input type="text" class="form-control" id="inC_Province" name="inC_Province" value="<?php echo (!empty($row["c_address_province"])) ? $row["c_address_province"] : ""; ?>" required/>
                                     </div>
                                     <div class="col-md">
                                         <?php _label("รหัสไปรษณีย์"); ?>
@@ -215,6 +212,7 @@
                                 <hr>
                                 <h3 class="card-title mt-4">Paren Information</h3>
                                 <div class="accordion" id="accordion-example">
+
                                     <div class="accordion-item">
                                         <h2 class="accordion-header" id="heading-1">
                                             <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-1" aria-expanded="true">
@@ -241,102 +239,139 @@
                                                     <div class="row g-3">
                                                         <div class="col-md">
                                                             <?php _label("title name"); ?>
-                                                            <input type="text" class="form-control " id="inF_TitleName" name="inF_TitleName" value="<?php echo (!empty($row["f_titlename"])) ? $row["f_titlename"] : ""; ?>" />
+                                                            <input type="text" class="form-control " id="inF_TitleName" name="inF_TitleName" value="<?php echo (!empty($row["father"]["titlename"])) ? $row["father"]["titlename"] : ""; ?>" />
                                                         </div>
                                                         <div class="col-md">
                                                             <?php _label("First name"); ?>
-                                                            <input type="text" class="form-control " id="inF_FirstName" name="inF_FirstName" value="<?php echo (!empty($row["f_firstname"])) ? $row["f_firstname"] : ""; ?>" />
+                                                            <input type="text" class="form-control " id="inF_FirstName" name="inF_FirstName" value="<?php echo (!empty($row["father"]["firstname"])) ? $row["father"]["firstname"] : ""; ?>" />
                                                         </div>
                                                         <div class="col-md">
                                                             <?php _label("Last name"); ?>
-                                                            <input type="text" class="form-control" id="inF_LastName" name="inF_LastName" value="<?php echo (!empty($row["f_lastname"])) ? $row["f_lastname"] : ""; ?>" />
+                                                            <input type="text" class="form-control" id="inF_LastName" name="inF_LastName" value="<?php echo (!empty($row["father"]["lastname"])) ? $row["father"]["lastname"] : ""; ?>" />
                                                         </div>
                                                         <div class="col-md">
                                                             <?php _label("Phone"); ?>
-                                                            <input type="text" class="form-control" id="inF_PhoneNumber" name="inF_PhoneNumber" value="<?php echo (!empty($row["f_phonenumber"])) ? $row["f_phonenumber"] : ""; ?>" />
+                                                            <input type="text" class="form-control" id="inF_PhoneNumber" name="inF_PhoneNumber" value="<?php echo (!empty($row["father"]["phonenumber"])) ? $row["father"]["phonenumber"] : ""; ?>" />
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="accordion-item">
-                                            <h2 class="accordion-header" id="heading-2">
-                                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-2" aria-expanded="false">
-                                                    <h4>*ข้อมูลมารดา</h4>
-                                                </button>
-                                            </h2>
-                                            <div id="collapse-2" class="accordion-collapse collapse" data-bs-parent="#accordion-example" style="">
-                                                <div class="accordion-body pt-0">
-                                                    <h3 class="card-title">Paren Image</h3>
+                                    </div>
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="heading-2">
+                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-2" aria-expanded="false">
+                                                <h4>*ข้อมูลมารดา</h4>
+                                            </button>
+                                        </h2>
+                                        <div id="collapse-2" class="accordion-collapse collapse" data-bs-parent="#accordion-example" style="">
+                                            <div class="accordion-body pt-0">
+                                                <h3 class="card-title">Paren Image</h3>
+                                                <div class="row g-3">
+                                                    <div class="row align-items-center">
+                                                        <input type='file' id="inParentLogo" style="display:none;" />
+                                                        <input type='hidden' id="inParentLogo64" name="inParentLogo64" style="display:none;" value="<?php echo (!empty($row["m_profile_image"])) ? $row["m_profile_image"] : ""; ?>" />
+                                                        <div class="col-auto">
+                                                            <span class="avatar avatar-xl" id="logo-image" style="background-image: url('<?php echo (!empty($row["m_profile_image"])) ? $row["m_profile_image"] : ""; ?>');">
+                                                            </span>
+                                                        </div>
+                                                        <div class="col-auto">
+                                                            <a href="#" class="btn" id="btn-change-image">Change avatar</a>
+                                                        </div>
+                                                    </div>
                                                     <div class="row g-3">
-                                                        <div class="row align-items-center">
-                                                            <input type='file' id="inParentLogo" style="display:none;" />
-                                                            <input type='hidden' id="inParentLogo64" name="inParentLogo64" style="display:none;" value="<?php echo (!empty($row["m_profile_image"])) ? $row["m_profile_image"] : ""; ?>" />
-                                                            <div class="col-auto">
-                                                                <span class="avatar avatar-xl" id="logo-image" style="background-image: url('<?php echo (!empty($row["m_profile_image"])) ? $row["m_profile_image"] : ""; ?>');">
-                                                                </span>
-                                                            </div>
-                                                            <div class="col-auto">
-                                                                <a href="#" class="btn" id="btn-change-image">Change avatar</a>
-                                                            </div>
+                                                        <div class="col-md">
+                                                            <?php _label("title name"); ?>
+                                                            <input type="text" class="form-control " id="inM_TitleName" name="inM_TitleName" value="<?php echo (!empty($row["mother"]["titlename"])) ? $row["mother"]["titlename"] : ""; ?>" />
                                                         </div>
-                                                        <div class="row g-3">
-                                                            <div class="col-md">
-                                                                <?php _label("title name"); ?>
-                                                                <input type="text" class="form-control " id="inM_TitleName" name="inM_TitleName" value="<?php echo (!empty($row["m_titlename"])) ? $row["m_titlename"] : ""; ?>" />
-                                                            </div>
-                                                            <div class="col-md">
-                                                                <?php _label("First name"); ?>
-                                                                <input type="text" class="form-control " id="inM_FirstName" name="inM_FirstName" value="<?php echo (!empty($row["m_firstname"])) ? $row["m_firstname"] : ""; ?>" />
-                                                            </div>
-                                                            <div class="col-md">
-                                                                <?php _label("Last name"); ?>
-                                                                <input type="text" class="form-control" id="inM_LastName" name="inM_LastName" value="<?php echo (!empty($row["m_lastname"])) ? $row["m_lastname"] : ""; ?>" />
-                                                            </div>
-                                                            <div class="col-md">
-                                                                <?php _label("Phone"); ?>
-                                                                <input type="text" class="form-control" id="inM_PhoneNumber" name="inM_PhoneNumber" value="<?php echo (!empty($row["m_phonenumber"])) ? $row["m_phonenumber"] : ""; ?>" />
-                                                            </div>
+                                                        <div class="col-md">
+                                                            <?php _label("First name"); ?>
+                                                            <input type="text" class="form-control " id="inM_FirstName" name="inM_FirstName" value="<?php echo (!empty($row["mother"]["firstname"])) ? $row["mother"]["firstname"] : ""; ?>" />
+                                                        </div>
+                                                        <div class="col-md">
+                                                            <?php _label("Last name"); ?>
+                                                            <input type="text" class="form-control" id="inM_LastName" name="inM_LastName" value="<?php echo (!empty($row["mother"]["lastname"])) ? $row["mother"]["lastname"] : ""; ?>" />
+                                                        </div>
+                                                        <div class="col-md">
+                                                            <?php _label("Phone"); ?>
+                                                            <input type="text" class="form-control" id="inM_PhoneNumber" name="inM_PhoneNumber" value="<?php echo (!empty($row["mother"]["phonenumber"])) ? $row["mother"]["phonenumber"] : ""; ?>" />
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
+                                        </div>
+                                    </div>
 
-                                            <div class="accordion-item">
-                                                <h2 class="accordion-header" id="heading-3">
-                                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-3" aria-expanded="false">
-                                                        <h4>*ผู้ปกครองไม่ใช่ บิดา-มารดา</h4>
-                                                    </button>
-                                                </h2>
-                                                <div id="collapse-3" class="accordion-collapse collapse" data-bs-parent="#accordion-example" style="">
-                                                    <div class="accordion-body pt-0">
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="heading-3">
+                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-3" aria-expanded="true">
+                                                <h4>*ผู้ปกครอง</h4>
 
+                                            </button>
+                                        </h2>
+                                        <div id="collapse-3" class="accordion-collapse collapse" data-bs-parent="#accordion-example" style="">
+                                            <div class="accordion-body pt-0">
+                                                <div class="mb-3">
+                                                    <div class="form-label">Inline Radios</div>
+                                                    <div>
+                                                        <label class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio" id="inFatherCheck" name="radios-inline" >
+                                                            <span class="form-check-label">ผู้ปกครองคือ"บิดา"</span>
+                                                        </label>
+                                                        <label class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio" id="inMotherCheck" name="radios-inline">
+                                                            <span class="form-check-label">ผู้ปกครองคือ"มารดา"</span>
+                                                        </label>
+                                                        <label class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio" id="inClearCheck" name="radios-inline" checked="">
+                                                            <span class="form-check-label">เคลียร์ข้อมูล</span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <h3 class="card-title">Paren Image</h3>
+                                                <div class="row g-3">
+                                                    <div class="row align-items-center">
+                                                        <input type='file' id="inParentLogo" style="display:none;" />
+                                                        <input type='hidden' id="inParentLogo64" name="inParentLogo64" style="display:none;" value="<?php echo (!empty($row["m_profile_image"])) ? $row["m_profile_image"] : ""; ?>" />
+                                                        <div class="col-auto">
+                                                            <span class="avatar avatar-xl" id="logo-image" style="background-image: url('<?php echo (!empty($row["m_profile_image"])) ? $row["m_profile_image"] : ""; ?>');">
+                                                            </span>
+                                                        </div>
+                                                        <div class="col-auto">
+                                                            <a href="#" class="btn" id="btn-change-image">Change avatar</a>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row g-3">
+                                                        <div class="col-md">
+                                                            <?php _label("title name"); ?>
+                                                            <input type="text" class="form-control " id="inP_TitleName" name="inP_TitleName" value="<?php echo (!empty($row["m_titlename"])) ? $row["m_titlename"] : ""; ?>" />
+                                                        </div>
+                                                        <div class="col-md">
+                                                            <?php _label("First name"); ?>
+                                                            <input type="text" class="form-control " id="inP_FirstName" name="inP_FirstName" value="<?php echo (!empty($row["m_firstname"])) ? $row["m_firstname"] : ""; ?>" />
+                                                        </div>
+                                                        <div class="col-md">
+                                                            <?php _label("Last name"); ?>
+                                                            <input type="text" class="form-control" id="inP_LastName" name="inP_LastName" value="<?php echo (!empty($row["m_lastname"])) ? $row["m_lastname"] : ""; ?>" />
+                                                        </div>
+                                                        <div class="col-md">
+                                                            <?php _label("Phone"); ?>
+                                                            <input type="text" class="form-control" id="inP_PhoneNumber" name="inP_PhoneNumber" value="<?php echo (!empty($row["m_phonenumber"])) ? $row["m_phonenumber"] : ""; ?>" />
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-
-
-
                                         </div>
-                                        <div class="card-footer bg-transparent mt-auto">
-                                            <div class="btn-list justify-content-end">
-                                                <button type="submit" class="btn btn-primary">Submit</button>
-                                            </div>
-                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+                        <div class="card-footer bg-transparent mt-auto">
+                            <div class="btn-list justify-content-end">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </div>
+                        </div>
                     </form>
-
-
-
-
-                    <input id="a" type=text>
-                    <input id="b" type=text>
-                    <input id="c" type=text>
-                    <input id="d" type=text>
-                    <hr />
-                    <input id="a1" type=text>
-                    <input id="b2" type=text>
-                    <input id="c3" type=text>
-                    <input id="d4" type=text>
                 </div>
             </div>
         </div>
@@ -346,14 +381,40 @@
     $("#inAddCheck").change(function() {
         if (this.checked) {
             $("#inC_No").val($("#inR_No").val());
+            $("#inC_Moo").val($("#inR_Moo").val());
+            $("#inC_Tambol").val($("#inR_Tambol").val());
+            $("#inC_AmPhur").val($("#inR_AmPhur").val());
+            $("#inC_Province").val($("#inR_Province").val());
+            $("#inC_ZipCode").val($("#inR_ZipCode").val());
         }
     });
 
+    $("#inFatherCheck").change(function() {
+        if (this.checked) {
+            $("#inP_TitleName").val($("#inF_TitleName").val());
+            $("#inP_FirstName").val($("#inF_FirstName").val());
+            $("#inP_LastName").val($("#inF_LastName").val());
+            $("#inP_PhoneNumber").val($("#inF_PhoneNumber").val());
+        }
+    });
 
-    // $("#copy").click(function() {
+    $("#inMotherCheck").change(function() {
+        if (this.checked) {
+            $("#inP_TitleName").val($("#inM_TitleName").val());
+            $("#inP_FirstName").val($("#inM_FirstName").val());
+            $("#inP_LastName").val($("#inM_LastName").val());
+            $("#inP_PhoneNumber").val($("#inM_PhoneNumber").val());
+        }
+    });
 
-
-    // });
+    $("#inClearCheck").change(function() {
+        if (this.checked) {
+            $("#inP_TitleName").val("");
+            $("#inP_FirstName").val("");
+            $("#inP_LastName").val("");
+            $("#inP_PhoneNumber").val("");
+        }
+    });
 
 
     $("#btn-change-image").click(function() {
