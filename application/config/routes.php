@@ -62,7 +62,7 @@ $route['set_theme/(:any)'] = 'Welcome/set_theme/$1';
 $route['activity'] = 'ProfileController/activityIndex';
 $route['profile'] = 'ProfileController/profileIndex';
 
-$route['school'] = 'SchoolController/schoolIndex';
+$route['building']='BuildingController/buildingIndex';
 $route['users'] = 'UserController/usersIndex';
 
 $route['personnel']='PersonnelController/personnelIndex';
@@ -73,3 +73,15 @@ $route['student']='StudentController/studentIndex';
 $route['student-insert-form']='StudentController/studentInsertForm';
 $route['student-edit-form/(:num)']='StudentController/studentEditForm/$1';
 
+$route['student-promote']='StudentController/studentPromoteIndex';
+$route['student-report']='StudentController/studentReportIndex';
+
+$route['school'] = 'SchoolController/schoolIndex';
+$route['clsslevel']='SchoolController/clssLevelIndex';
+$route['rooms']='SchoolController/roomsIndex';
+$route['homeroom-teacher']='SchoolController/homeroomTeacherIndex';
+$route['subject-teacher']='SchoolController/subjectTeacherIndex';
+
+$route['syllabus']='CourseConroller/syllaBusIndex';
+$route['course']='CourseConroller/courseIndex';
+$route['course-register']='CourseConroller/courseRegisterIndex';
