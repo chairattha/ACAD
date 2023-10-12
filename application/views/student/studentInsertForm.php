@@ -52,7 +52,7 @@
                                 </div>
                                 <div class="col-md">
                                     <?php _label("Last Name"); ?>
-                                    <input type="text" class="form-control" id="inLastName" name="inLastName" value="<?php echo (!empty($row["lastname"])) ? $row["lastname"] : ""; ?>" required/>
+                                    <input type="text" class="form-control" id="inLastName" name="inLastName" value="<?php echo (!empty($row["lastname"])) ? $row["lastname"] : ""; ?>" required />
                                 </div>
                                 <div class="col-md">
                                     <?php _label("Nick Name"); ?>
@@ -195,11 +195,11 @@
                                 <div class="row g-3">
                                     <div class="col-md">
                                         <?php _label("อำเภอ"); ?>
-                                        <input type="text" class="form-control" id="inC_AmPhur" name="inC_AmPhur" value="<?php echo (!empty($row["c_address_amphur"])) ? $row["c_address_amphur"] : ""; ?>" required/>
+                                        <input type="text" class="form-control" id="inC_AmPhur" name="inC_AmPhur" value="<?php echo (!empty($row["c_address_amphur"])) ? $row["c_address_amphur"] : ""; ?>" required />
                                     </div>
                                     <div class="col-md">
                                         <?php _label("จังหวัด"); ?>
-                                        <input type="text" class="form-control" id="inC_Province" name="inC_Province" value="<?php echo (!empty($row["c_address_province"])) ? $row["c_address_province"] : ""; ?>" required/>
+                                        <input type="text" class="form-control" id="inC_Province" name="inC_Province" value="<?php echo (!empty($row["c_address_province"])) ? $row["c_address_province"] : ""; ?>" required />
                                     </div>
                                     <div class="col-md">
                                         <?php _label("รหัสไปรษณีย์"); ?>
@@ -238,8 +238,15 @@
                                                     </div>
                                                     <div class="row g-3">
                                                         <div class="col-md">
-                                                            <?php _label("title name"); ?>
-                                                            <input type="text" class="form-control " id="inF_TitleName" name="inF_TitleName" value="<?php echo (!empty($row["father"]["titlename"])) ? $row["father"]["titlename"] : ""; ?>" />
+                                                            <?php _label("Title Name"); ?>
+                                                            <select class="form-select tomselected " id="inF_TitleName" name="inF_TitleName">
+                                                                <option value="">เลือกข้อมูล</option>
+                                                                <?php $title = array("นาย","นาง","นางสาว"); ?>
+                                                                <?php foreach ($title as $t) { ?>
+                                                                    <?php $sel = (!empty($row["father"]["titlename"]) && $row["father"]["titlename"] == $t) ? "selected" : ""; ?>
+                                                                    <option value="<?php echo $t ?>" <?php echo $sel ?>><?php echo $t ?></option>
+                                                                <?php } ?>
+                                                            </select>
                                                         </div>
                                                         <div class="col-md">
                                                             <?php _label("First name"); ?>
@@ -280,9 +287,16 @@
                                                         </div>
                                                     </div>
                                                     <div class="row g-3">
-                                                        <div class="col-md">
-                                                            <?php _label("title name"); ?>
-                                                            <input type="text" class="form-control " id="inM_TitleName" name="inM_TitleName" value="<?php echo (!empty($row["mother"]["titlename"])) ? $row["mother"]["titlename"] : ""; ?>" />
+                                                    <div class="col-md">
+                                                            <?php _label("Title Name"); ?>
+                                                            <select class="form-select tomselected " id="inM_TitleName" name="inM_TitleName">
+                                                                <option value="">เลือกข้อมูล</option>
+                                                                <?php $title = array("นาย","นาง","นางสาว"); ?>
+                                                                <?php foreach ($title as $t) { ?>
+                                                                    <?php $sel = (!empty($row["mother"]["titlename"]) && $row["mother"]["titlename"] == $t) ? "selected" : ""; ?>
+                                                                    <option value="<?php echo $t ?>" <?php echo $sel ?>><?php echo $t ?></option>
+                                                                <?php } ?>
+                                                            </select>
                                                         </div>
                                                         <div class="col-md">
                                                             <?php _label("First name"); ?>
@@ -315,7 +329,7 @@
                                                     <div class="form-label">Inline Radios</div>
                                                     <div>
                                                         <label class="form-check form-check-inline">
-                                                            <input class="form-check-input" type="radio" id="inFatherCheck" name="radios-inline" >
+                                                            <input class="form-check-input" type="radio" id="inFatherCheck" name="radios-inline">
                                                             <span class="form-check-label">ผู้ปกครองคือ"บิดา"</span>
                                                         </label>
                                                         <label class="form-check form-check-inline">
@@ -343,9 +357,16 @@
                                                     </div>
 
                                                     <div class="row g-3">
-                                                        <div class="col-md">
-                                                            <?php _label("title name"); ?>
-                                                            <input type="text" class="form-control " id="inP_TitleName" name="inP_TitleName" value="<?php echo (!empty($row["m_titlename"])) ? $row["m_titlename"] : ""; ?>" />
+                                                    <div class="col-md">
+                                                            <?php _label("Title Name"); ?>
+                                                            <select class="form-select tomselected " id="inP_TitleName" name="inP_TitleName">
+                                                                <option value="">เลือกข้อมูล</option>
+                                                                <?php $title = array("นาย","นาง","นางสาว"); ?>
+                                                                <?php foreach ($title as $t) { ?>
+                                                                    <?php $sel = (!empty($row[""]["titlename"]) && $row[""]["titlename"] == $t) ? "selected" : ""; ?>
+                                                                    <option value="<?php echo $t ?>" <?php echo $sel ?>><?php echo $t ?></option>
+                                                                <?php } ?>
+                                                            </select>
                                                         </div>
                                                         <div class="col-md">
                                                             <?php _label("First name"); ?>
