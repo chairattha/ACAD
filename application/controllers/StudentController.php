@@ -20,6 +20,22 @@ class StudentController extends CI_Controller
         $this->load->view("student/studentIndex", $data);
         $this->load->view("layout/footer");
     }
+    public function studentPromoteIndex()
+    {
+        $data["student"] = $this->StudentModel->get_student();
+
+        $this->load->view("layout/header");
+        $this->load->view("student/studentpromoteIndex", $data);
+        $this->load->view("layout/footer");
+    }
+    public function studentReportIndex()
+    {
+        $data["student"] = $this->StudentModel->get_student();
+
+        $this->load->view("layout/header");
+        $this->load->view("student/studentreportIndex", $data);
+        $this->load->view("layout/footer");
+    }
     public function studentInsertForm()
     {
         $this->load->view("layout/header");

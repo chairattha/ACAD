@@ -45,4 +45,32 @@ class SchoolController extends CI_Controller
         $this->load->view("school/setting/educationYearSemesterIndex");
         $this->load->view("layout/footer");
     }
+
+    public function clssLevelIndex()
+    {
+        $this->load->view("layout/header");
+        $this->load->view("clss-level/clsslevelIndex");
+        $this->load->view("layout/footer");
+    }
+
+    public function roomsIndex()
+    {
+        $this->load->view("layout/header");
+        $this->load->view("rooms/roomsIndex");
+        $this->load->view("layout/footer");
+    }
+
+    public function homeroomTeacherIndex()
+    {
+        $this->load->view("layout/header");
+        $this->load->view("homeroom-teacher/homeroomteacherIndex");
+        $this->load->view("layout/footer");
+    }
+
+    public function subjectTeacherIndex()
+    {
+        $this->load->view("layout/header");
+        $this->load->view("subject-teacher/subjectteacherIndex");
+        $this->load->view("layout/footer");
+    }
 }
