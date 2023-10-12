@@ -107,8 +107,6 @@
                                             <option value="<?php echo $r ?>" <?php echo $sel ?>><?php echo $r ?></option>
                                         <?php } ?>
                                     </select>
-                                    <?php //_input($type = "text", $id = "inReligion", $name = "inReligion", $value = "") 
-                                    ?>
                                 </div>
                                 <div class="col-md">
                                     <?php _label("Ethnicity"); ?>
@@ -120,8 +118,6 @@
                                             <option value="<?php echo $e ?>" <?php echo $sel ?>><?php echo $e ?></option>
                                         <?php } ?>
                                     </select>
-                                    <?php //_input($type = "text", $id = "inEthnicity", $name = "inEthnicity", $value = "") 
-                                    ?>
                                 </div>
                                 <div class="col-md">
                                     <?php _label("Nationality"); ?>
@@ -133,20 +129,16 @@
                                             <option value="<?php echo $n ?>" <?php echo $sel ?>><?php echo $n ?></option>
                                         <?php } ?>
                                     </select>
-                                    <?php //_input($type = "text", $id = "inNationality", $name = "inNationality", $value = "") 
-                                    ?>
                                 </div>
                                 <div class="col-md">
                                     <?php _label("Type"); ?>
-                                    <select type="text" class="form-select tomselected " id="inType" name="inType" value="" tabindex="-1">
+                                    <select type="text" class="form-select tomselected " id="inType" name="inType" value="" tabindex="-1" required>
                                         <option value="">เลือกข้อมูล</option>
                                         <?php foreach ($type as $t) { ?>
-                                            <?php $sel = (!empty($row["name"]) && $row["name"] == $t["name"]) ? "selected" : ""; ?>
+                                            <?php $sel = (!empty($row["type_id"]) && $row["type_id"] == $t["id"]) ? "selected" : ""; ?>
                                             <option value="<?php echo $t["id"] ?>" <?php echo $sel ?>><?php echo $t["name"] ?></option>
                                         <?php } ?>
                                     </select>
-                                    <?php //_input($type = "text", $id = "inNationality", $name = "inNationality", $value = "") 
-                                    ?>
                                 </div>
                             </div>
                         </div>
@@ -188,7 +180,7 @@
             url: " <?php echo (!empty($this->uri->segment(2))) ? site_url("PersonnelController/update_personnel") : site_url("PersonnelController/insert_personnel"); ?>",
             data: $(this).serialize(),
         }).done(function(data) {
-            alert (data),
+            alert (data);
             //$("#inFirstName").addClass("is-invalid");
             location.reload();
         });
