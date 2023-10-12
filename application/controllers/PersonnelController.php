@@ -54,7 +54,7 @@ class PersonnelController extends CI_Controller
             "nationality" => $this->input->post("inNationality")
             
         );
-        $this->PersonnelModel->insert_personnel($arr);
+        echo $this->PersonnelModel->insert_personnel($arr);
     }
     public function update_personnel()
     {
