@@ -7,7 +7,7 @@ class PersonnelModel extends CI_Model
         if (!empty($school_id)) {
             $this->db->select('CONCAT(a.titlename, a.firstname, " ", a.lastname) AS fullname');
             $this->db->select('a.*,a.id as personnel_id,a.titlename as personnel_titlename ,a.firstname as personnel_firstname ,a.lastname as personnel_lastname ,CONCAT(a.titlename,a.firstname," ",a.lastname)as personnel_fullname');
-            $this->db->select('c.name as type_name,d.id as school_id,d.name as school_name');
+            $this->db->select('c.id as type_id,c.name as type_name,d.id as school_id,d.name as school_name');
             $this->db->select('a.profile_image as personnel_profile_image');
             $this->db->from('tb_personnel a');
             $this->db->join('tb_personnel_register b', 'b.personnel_id = a.id');
@@ -25,7 +25,7 @@ class PersonnelModel extends CI_Model
         if (!empty($personnel_id)) {
             $this->db->select('CONCAT(a.titlename, a.firstname, " ", a.lastname) AS fullname');
             $this->db->select('a.*,a.id as personnel_id,a.titlename as personnel_titlename ,a.firstname as personnel_firstname ,a.lastname as personnel_lastname ,CONCAT(a.titlename,a.firstname," ",a.lastname)as personnel_fullname');
-            $this->db->select('c.name as type_name,d.id as school_id,d.name as school_name');
+            $this->db->select('c.id as type_id,c.name as type_name,d.id as school_id,d.name as school_name');
             $this->db->select('a.profile_image as personnel_profile_image');
             $this->db->from('tb_personnel a');
             $this->db->join('tb_personnel_register b', 'b.personnel_id = a.id');
@@ -41,9 +41,9 @@ class PersonnelModel extends CI_Model
     public function get_personnel_by_user_id($user_id)
     {
         if (!empty($user_id)) {
-            $this->db->select('a.id as personnel_id,a.titlename as personnel_titlename ,a.firstname as personnel_firstname ,a.lastname as personnel_lastname ,CONCAT(a.titlename,a.firstname," ",a.lastname)as personnel_fullname');
+            $this->db->select('a.*,a.id as personnel_id,a.titlename as personnel_titlename ,a.firstname as personnel_firstname ,a.lastname as personnel_lastname ,CONCAT(a.titlename,a.firstname," ",a.lastname)as personnel_fullname');
             $this->db->select('d.id as school_id,d.name as school_name');
-            $this->db->select('a.profile_image as personnel_profile_image');
+            $this->db->select('c.id as type_id,a.profile_image as personnel_profile_image');
             // $this->db->select('u.user_id');
             $this->db->from('tb_personnel a');
             $this->db->join('tb_user_personnel u', 'u.personnel_id = a.id AND u.user_id = ' . $user_id, 'LEFT OUTER');
