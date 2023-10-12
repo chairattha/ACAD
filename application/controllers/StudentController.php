@@ -67,13 +67,13 @@ class StudentController extends CI_Controller
              "f_phonenumber" => $this->input->post("inF_PhoneNumber"),
  
             
-             "m_titlename" => $this->input->post("inF_TitleName"),
-             "m_firstname" => $this->input->post("inF_FirstName"),
-             "m_lastname" => $this->input->post("inF_LastName"),
+             "m_titlename" => $this->input->post("inM_TitleName"),
+             "m_firstname" => $this->input->post("inM_FirstName"),
+             "m_lastname" => $this->input->post("inM_LastName"),
              "m_profile_image" => $this->input->post("inParentLogo64"),
-             "m_phonenumber" => $this->input->post("inF_PhoneNumber")
+             "m_phonenumber" => $this->input->post("inM_PhoneNumber")
         );
-        $this->StudentModel->insert_student($arr);
+        $this->StudentModel->update_student($arr);
     }
 
     public function studentEditForm($std_id)
@@ -127,11 +127,11 @@ class StudentController extends CI_Controller
             "f_phonenumber" => $this->input->post("inF_PhoneNumber"),
 
             #ข้อมูลพื้นฐานแม่
-            "m_titlename" => $this->input->post("inF_TitleName"),
-            "m_firstname" => $this->input->post("inF_FirstName"),
-            "m_lastname" => $this->input->post("inF_LastName"),
+            "m_titlename" => $this->input->post("inM_TitleName"),
+            "m_firstname" => $this->input->post("inM_FirstName"),
+            "m_lastname" => $this->input->post("inM_LastName"),
             "m_profile_image" => $this->input->post("inParentLogo64"),
-            "m_phonenumber" => $this->input->post("inF_PhoneNumber")
+            "m_phonenumber" => $this->input->post("inM_PhoneNumber")
         );
         $this->StudentModel->update_student($arr, $this->input->post("inStdId"));
     }
