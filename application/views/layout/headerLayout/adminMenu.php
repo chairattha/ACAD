@@ -22,10 +22,10 @@
                         <?php menu_a("Menu", "Menu"); ?>
                         <?php menu_a("Users", "users"); ?>
                     </div>
-                    <?php menu_a("Class level", "/"); ?>
-                    <?php menu_a("Rooms", "/"); ?>
-                    <?php menu_a("Homeroom teacher", "/"); ?>
-                    <?php menu_a("Subject teacher", "/"); ?>
+                    <?php menu_a("Class level", "clsslevel"); ?>
+                    <?php menu_a("Rooms", "rooms"); ?>
+                    <?php menu_a("Homeroom teacher", "homeroom-teacher"); ?>
+                    <?php menu_a("Subject teacher", "subject-teacher"); ?>
                 </div>
             </div>
         </div>
@@ -44,9 +44,9 @@
     <div class="dropdown-menu">
         <div class="dropdown-menu-columns">
             <div class="dropdown-menu-column">
-                <?php menu_a("Syllabus", "/"); ?>
-                <?php menu_a("Course", "/"); ?>
-                <?php menu_a("Course register", "/"); ?>
+                <?php menu_a("Syllabus", "syllabus"); ?>
+                <?php menu_a("Course", "course"); ?>
+                <?php menu_a("Course register", "course-register"); ?>
             </div>
         </div>
     </div>
@@ -83,8 +83,27 @@
         <div class="dropdown-menu-columns">
             <div class="dropdown-menu-column">
                 <?php menu_a("Student information", "student"); ?>
-                <?php menu_a("Student promote", "/"); ?>
-                <?php menu_a("Student report", "/"); ?>
+                <?php menu_a("Student promote", "student-promote"); ?>
+                <?php menu_a("Student report", "student-report"); ?>
+            </div>
+        </div>
+    </div>
+</li>
+
+<li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#navbar-base" data-bs-toggle="dropdown" data-bs-auto-close="outside"
+        role="button" aria-expanded="false">
+        <span class="nav-link-icon d-md-none d-lg-inline-block">
+            <i class="ti ti-school"></i>
+        </span>
+        <span class="nav-link-title">
+            building
+        </span>
+    </a>
+    <div class="dropdown-menu">
+        <div class="dropdown-menu-columns">
+            <div class="dropdown-menu-column">
+                <?php menu_a("building", "building"); ?>
             </div>
         </div>
     </div>
