@@ -17,6 +17,13 @@ class SchoolController extends CI_Controller
     {
         $data["schoolTypeArr"] = $this->SchoolModel->get_school_type();
         $data["row"] = $this->SchoolModel->get_school();
+        $edyear = (!empty($this->input->get("edyear"))) ? $this->input->get("edyear") : date("Y") + 543;
+        $data["edyear"] = $edyear;
+        $school_id = $this->session->userdata("userSchoolId");
+        // $data["edyear"] = date("Y") + 543;
+        $data["edyearRow"] = $this->SchoolModel->get_edyear_by_edyear($school_id, $edyear);
+        $data["semester"] = $this->SchoolModel->get_all_semester_by_edyear($school_id, $edyear);
+
         $this->load->view("layout/header");
         $this->load->view("school/schoolIndex", $data);
         $this->load->view("layout/footer");
@@ -35,21 +42,40 @@ class SchoolController extends CI_Controller
             'phone' => $_POST["inSchoolPhone"]
         );
         $this->SchoolModel->update_school($_POST["inSchoolId"], $data);
-        echo $_POST["inSchoolId"]; //$this->input->post("inSchoolName");
     }
 
-    #Education Year and Semester Setting
-    public function educationYearSemesterIndex()
+    public function update_edyear()
     {
-        $this->load->view("layout/header");
-        $this->load->view("school/setting/educationYearSemesterIndex");
-        $this->load->view("layout/footer");
+        if (!empty($this->input->post("inEdYearStartdate")) && !empty($this->input->post("inEdYearEnddate"))) {
+            $data = array(
+                'school_id' => $this->session->userdata("userSchoolId"),
+                'year' => $this->input->post("inSchoolEdyear"),
+                'startdate' => strtotime($this->input->post("inEdYearStartdate")),
+                'enddate' => strtotime($this->input->post("inEdYearEnddate"))
+            );
+            echo $this->SchoolModel->update_edyear($data);
+
+            $maximum = $this->input->post("inMaximumSemester");
+            for ($x = 1; $x <= $maximum; $x++) {
+                $data2 = array(
+                    'school_id' => $this->session->userdata("userSchoolId"),
+                    'edyear' => $this->input->post("inSchoolEdyear"),
+                    'semester_number' => $x,
+                    'startdate' => strtotime($this->input->post("inSemester" . $x . "Startdate")),
+                    'enddate' => strtotime($this->input->post("inSemester" . $x . "Enddate"))
+                );
+                $this->SchoolModel->update_semester($data2);
+            }
+        } else {
+            echo "missing parameter";
+        }
     }
 
     public function clssLevelIndex()
     {
+        $data["clss"] = $this->SchoolModel->get_school_clss();
         $this->load->view("layout/header");
-        $this->load->view("clss-level/clsslevelIndex");
+        $this->load->view("clss-level/clsslevelIndex",$data);
         $this->load->view("layout/footer");
     }
 

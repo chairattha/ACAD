@@ -5,7 +5,8 @@ class SchoolModel extends CI_Model
     {
         $this->db->select('a.id as school_id,a.name as school_name,logo as school_logo');
         $this->db->select('a.tambol as school_tambol,a.amphur as school_amphur,a.province as school_province,a.zipcode as school_zipcode,a.phone as school_phone');
-$this->db->select('b.id as school_type_id,b.name as school_type_name');
+        $this->db->select('a.maximum_semester');
+        $this->db->select('b.id as school_type_id,b.name as school_type_name');
         $this->db->from('tb_school a');
         $this->db->join('tb_school_type b', 'b.id = a.school_type_id');
         $this->db->where(array('a.id' => 1));
@@ -17,8 +18,8 @@ $this->db->select('b.id as school_type_id,b.name as school_type_name');
     {
 
     }
-    public function update_school($id,$data)
-    {  
+    public function update_school($id, $data)
+    {
         $this->db->where('id', $id);
         $this->db->update('tb_school', $data);
         // return $this->input->post("inSchoolName");
@@ -27,6 +28,95 @@ $this->db->select('b.id as school_type_id,b.name as school_type_name');
     public function get_school_type()
     {
         $this->db->select('id as school_type_id,name as type_name')->from('tb_school_type');
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
+
+    #ดึงข้อมูลปีการศึกษา
+    public function get_edyear_by_edyear($school_id, $edyear)
+    {
+        $this->db->select('*')->from('tb_school_education_year')->where(array("school_id" => $school_id, "year" => $edyear));
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+
+    #ดึงข้อมูลภาคเรียน
+    public function get_all_semester_by_edyear($school_id, $edyear)
+    {
+        $this->db->select('*')->from('tb_school_semester')->where(array("school_id" => $school_id, "edyear" => $edyear));
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
+    public function get_semester_by_edyear($school_id, $edyear, $semester)
+    {
+        $this->db->select('*')->from('tb_school_semester')->where(array("school_id" => $school_id, "edyear" => $edyear, "semester_number" => $semester));
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+    public function update_edyear($data)
+    {
+        if (!empty($data["school_id"]) && !empty($data["year"])) {
+            #update edyear
+            $chk = $this->get_edyear_by_edyear($data["school_id"], $data["year"]);
+
+            $this->db->trans_begin();
+            if (!empty($chk["id"])) {
+                $this->db->where(array("school_id" => $data["school_id"], "year" => $data["year"]));
+                $this->db->update('tb_school_education_year', $data);
+            } else {
+                $this->db->insert('tb_school_education_year', $data);
+            }
+
+            if ($this->db->trans_status() === FALSE) {
+                $this->db->trans_rollback();
+                return "rollback";
+            } else {
+                $this->db->trans_commit();
+                return "success";
+            }
+
+        } else {
+            return "missing parameter";
+        }
+
+    }
+
+    public function update_semester($data)
+    {
+        if (!empty($data["school_id"]) && !empty($data["edyear"])) {
+            $chk = $this->get_semester_by_edyear($data["school_id"], $data["edyear"], $data["semester_number"]);
+
+            $this->db->trans_begin();
+
+            #update semester           
+            if (!empty($chk["id"])) {
+                $this->db->where(array("school_id" => $data["school_id"], "edyear" => $data["edyear"], "semester_number" => $data["semester_number"]));
+                $this->db->update('tb_school_semester', $data);
+            } else {
+                $this->db->insert('tb_school_semester', $data);
+            }
+
+            if ($this->db->trans_status() === FALSE) {
+                $this->db->trans_rollback();
+                return "rollback";
+            } else {
+                $this->db->trans_commit();
+                return "success";
+            }
+        } else {
+            return "missing parameter";
+        }
+
+    }
+
+    #ดึงข้อมูลระดับชั้นทั้งหมด
+    public function get_school_clss()
+    {
+        $this->db->select('*')->from('tb_school_class')->where(array());
         $query = $this->db->get();
         return $query->result_array();
     }
