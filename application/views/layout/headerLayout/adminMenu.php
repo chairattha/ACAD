@@ -12,7 +12,6 @@
         <div class="dropdown-menu-columns">
             <div class="dropdown-menu-column">
                 <?php menu_a("School", "school"); ?>
-                <?php menu_a("Education year & semester", "education-year-semester"); ?>
                 <div class="dropend">
                     <a class="dropdown-item dropdown-toggle"  data-bs-toggle="dropdown"
                         data-bs-auto-close="outside" role="button" aria-expanded="false">
