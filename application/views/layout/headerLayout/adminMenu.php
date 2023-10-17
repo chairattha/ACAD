@@ -21,7 +21,6 @@
                         <?php menu_a("Menu", "Menu"); ?>
                         <?php menu_a("Users", "users"); ?>
                     </div>
-                    <?php menu_a("Class level", "clsslevel"); ?>
                     <?php menu_a("Rooms", "rooms"); ?>
                     <?php menu_a("Homeroom teacher", "homeroom-teacher"); ?>
                     <?php menu_a("Subject teacher", "subject-teacher"); ?>

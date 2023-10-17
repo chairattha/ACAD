@@ -77,7 +77,6 @@ $route['student-promote']='StudentController/studentPromoteIndex';
 $route['student-report']='StudentController/studentReportIndex';
 
 $route['school'] = 'SchoolController/schoolIndex';
-$route['clsslevel']='SchoolController/clssLevelIndex';
 $route['rooms']='SchoolController/roomsIndex';
 $route['homeroom-teacher']='SchoolController/homeroomTeacherIndex';
 $route['subject-teacher']='SchoolController/subjectTeacherIndex';

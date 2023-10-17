@@ -18,7 +18,7 @@
 <div class="page-body">
     <div class="container-xl">
         <div class="row ">
-            <div class="col-7 d-flex flex-column">
+            <div class="col-9 d-flex flex-column">
                 <div class="card">
                     <form id="insert-form" method="post" autocomplete="off" enctype="multipart/form-data">
 
@@ -106,8 +106,7 @@
                     </form>
 
                 </div>
-            </div>
-            <div class="col-5 d-flex flex-column">
+                <br />
                 <div class="card">
                     <form id="edyear-form" method="post" autocomplete="off" enctype="multipart/form-data">
                         <input type="hidden" id="inMaximumSemester" name="inMaximumSemester"
@@ -164,12 +163,14 @@
                                     <div class="col-md">
                                         <?php _label("Start date"); ?>
                                         <input type="date" class="form-control" id="inSemester<?php echo $x ?>Startdate"
-                                            name="inSemester<?php echo $x ?>Startdate" value="<?php echo (!empty($startdate))?$startdate:""; ?>" />
+                                            name="inSemester<?php echo $x ?>Startdate"
+                                            value="<?php echo (!empty($startdate)) ? $startdate : ""; ?>" />
                                     </div>
                                     <div class="col-md">
                                         <?php _label("End date"); ?>
                                         <input type="date" class="form-control" id="inSemester<?php echo $x ?>Enddate"
-                                            name="inSemester<?php echo $x ?>Enddate" value="<?php echo (!empty($enddate))?$enddate:""; ?>" />
+                                            name="inSemester<?php echo $x ?>Enddate"
+                                            value="<?php echo (!empty($enddate)) ? $enddate : ""; ?>" />
                                     </div>
                                 </div>
                             <?php } ?>
@@ -183,8 +184,35 @@
 
                 </div>
             </div>
-        </div>
 
+            <div class="col-3 d-flex flex-column">
+                <div class="card">
+                    <form id="clss-form" method="post" autocomplete="off" enctype="multipart/form-data">
+                        <div class="card-body">
+                            <h3 class="card-title mt-4">Class level</h3>
+                            <?php
+                            foreach ($clss as $s) { ?>
+                                <?php $chk = (!empty($s['cls_id'])) ? "checked" : ""; ?>
+                                <label class="form-check">
+                                    <input class="form-check-input" type="checkbox"
+                                        name="inClssCheckBox<?php echo $s["school_cls_id"] ?>"
+                                        style="width:20px;height:20px;" value="<?php echo $s["school_cls_id"] ?>" <?= $chk ?>>
+                                    <span class="form-check-label">&nbsp;
+                                        <?php echo $s["name"] ?>
+                                        <?php echo $s["level"] ?>
+                                    </span>
+                                </label>
+                            <?php } ?>
+                        </div>
+                        <div class="card-footer bg-transparent mt-auto">
+                            <div class="btn-list justify-content-end">
+                                <button type="submit" class="btn btn-primary">Update</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 <script>
@@ -233,6 +261,18 @@
             data: $(this).serialize(),
         }).done(function (data) {
             console.log(data);
+            alert(data);
+            location.reload();
+        });
+    });
+
+    $("#clss-form").submit(function (e) {
+        e.preventDefault();
+        $.ajax({
+            type: "POST",
+            url: "<?php echo site_url("SchoolController/update_clss"); ?>",
+            data: $(this).serialize(),
+        }).done(function (data) {
             alert(data);
             location.reload();
         });

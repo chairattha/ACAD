@@ -23,6 +23,7 @@ class SchoolController extends CI_Controller
         // $data["edyear"] = date("Y") + 543;
         $data["edyearRow"] = $this->SchoolModel->get_edyear_by_edyear($school_id, $edyear);
         $data["semester"] = $this->SchoolModel->get_all_semester_by_edyear($school_id, $edyear);
+        $data["clss"] = $this->SchoolModel->get_school_clss();
 
         $this->load->view("layout/header");
         $this->load->view("school/schoolIndex", $data);
@@ -71,12 +72,29 @@ class SchoolController extends CI_Controller
         }
     }
 
-    public function clssLevelIndex()
+    public function update_clss()
     {
-        $data["clss"] = $this->SchoolModel->get_school_clss();
-        $this->load->view("layout/header");
-        $this->load->view("clss-level/clsslevelIndex",$data);
-        $this->load->view("layout/footer");
+        $clss = $this->SchoolModel->get_school_clss();
+        $result = "";
+        foreach ($clss as $c) {
+            if (!empty($this->input->post("inClssCheckBox" . $c["school_cls_id"]))) {
+                $data = array(
+                    'school_id' => $this->session->userdata("userSchoolId"),
+                    'school_class_id' => $c['school_cls_id'],
+                    'register_sequence' => $c['sequence'],
+                    'register_graduation' => FALSE,
+                );
+                $this->SchoolModel->update_clss($data);
+                $result = "Update Success";
+            } else {
+                $chk = $this->SchoolModel->get_school_clss_by_school_id_and_school_class_id($this->session->userdata("userSchoolId"), $c['school_cls_id']);
+                if (!empty($chk['cls_id'])) {
+                    $this->SchoolModel->delete_clss($chk['cls_id']);
+                    $result .= "\n Delete Success";
+                }
+            }
+        }
+        echo $result;
     }
 
     public function roomsIndex()

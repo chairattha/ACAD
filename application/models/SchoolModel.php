@@ -14,10 +14,6 @@ class SchoolModel extends CI_Model
         return $query->row_array();
     }
 
-    public function insert_school()
-    {
-
-    }
     public function update_school($id, $data)
     {
         $this->db->where('id', $id);
@@ -116,9 +112,68 @@ class SchoolModel extends CI_Model
     #ดึงข้อมูลระดับชั้นทั้งหมด
     public function get_school_clss()
     {
-        $this->db->select('*')->from('tb_school_class')->where(array());
+        $this->db->select('*,a.id as school_cls_id,b.id as cls_id');
+        $this->db->from('tb_school_class a');
+        $this->db->join('tb_school_class_register b', 'b.school_class_id = a.id', 'LEFT OUTER');
+        $this->db->order_by('a.sequence ASC');
+        $this->db->where(array("a.education_type" => "ordinary"));
+
         $query = $this->db->get();
         return $query->result_array();
+    }
+
+    public function get_school_clss_by_school_id_and_school_class_id($school_id, $school_clss_id)
+    {
+        $this->db->select('*,id as cls_id')->from('tb_school_class_register')->where(array("school_id" => $school_id, "school_class_id" => $school_clss_id));
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+    public function update_clss($data)
+    {
+        if (!empty($data["school_id"]) && !empty($data["school_class_id"])) {
+            $chk = $this->get_school_clss_by_school_id_and_school_class_id($data["school_id"], $data["school_class_id"]);
+
+            $this->db->trans_begin();
+
+            #update clss         
+            if (!empty($chk["cls_id"])) {
+                $this->db->where(array("school_id" => $data["school_id"], "school_class_id" => $data["school_class_id"]));
+                $this->db->update('tb_school_class_register', $data);
+            } else {
+                $this->db->insert('tb_school_class_register', $data);
+            }
+
+            if ($this->db->trans_status() === FALSE) {
+                $this->db->trans_rollback();
+                return "rollback";
+            } else {
+                $this->db->trans_commit();
+                return "success";
+            }
+        } else {
+            return "missing parameter";
+        }
+
+    }
+
+    public function delete_clss($id)
+    {
+        if (!empty($id)) {
+            $this->db->trans_begin();
+
+            $this->db->delete('tb_school_class_register', array('id' => $id));
+
+            if ($this->db->trans_status() === FALSE) {
+                $this->db->trans_rollback();
+                return "rollback";
+            } else {
+                $this->db->trans_commit();
+                return "success";
+            }
+        } else {
+            return "missing parameter";
+        }
     }
 
 }
