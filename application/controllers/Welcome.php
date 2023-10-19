@@ -24,4 +24,16 @@ class Welcome extends CI_Controller
 			redirect(site_url('/'), 'refresh');
 		}
 	}
+
+	public function set_edyear()
+	{
+		$edyear = $this->input->post('Edyear');
+		$this->session->set_userdata('userEdyear', $edyear);
+	}
+
+	public function set_semester()
+	{
+		$semester = $this->input->post('Semester');
+		$this->session->set_userdata('userSemester', $semester);
+	}
 }

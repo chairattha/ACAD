@@ -23,6 +23,8 @@ class AuthenticationController extends CI_Controller
 				$this->session->set_userdata('userImage', $Personnel['personnel_profile_image']);
 				$this->session->set_userdata('userSchool', $Personnel["school_name"]);
 				$this->session->set_userdata('userSchoolId', $Personnel["school_id"]);
+				$this->session->set_userdata("userEdyear", date("Y") + 543);
+				$this->session->set_userdata("userSemester", 1);
 				$this->session->set_userdata('userTheme', 'light');
 				$this->session->set_userdata('userLanguage', 'en');
 				$this->session->set_userdata('userId', $row['id']);

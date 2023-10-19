@@ -17,6 +17,10 @@
 					</a>
 				</h1>
 				<div class="navbar-nav flex-row order-md-last">
+
+
+					<?php $this->load->view("layout/headerLayout/edyearsemester"); ?>
+
 					<a href="<?php echo site_url("set_theme/dark"); ?>" class="nav-link px-0 hide-theme-dark"
 						title="Enable dark mode" data-bs-toggle="tooltip" data-bs-placement="bottom">
 						<i class="ti ti-moon"></i>
@@ -27,6 +31,7 @@
 						<i class="ti ti-sun"></i>
 					</a>
 					<?php // $this->load->view("layout/headerLayout/notification"); ?>
+
 					<div class="nav-item dropdown">
 						<a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown"
 							aria-label="Open user menu">
@@ -62,8 +67,7 @@
 						<ul class="navbar-nav">
 							<li class="nav-item active">
 								<a class="nav-link" href="<?php echo site_url("/"); ?>">
-									<span
-										class="nav-link-icon d-md-none d-lg-inline-block">
+									<span class="nav-link-icon d-md-none d-lg-inline-block">
 										<i class="ti ti-home"></i>
 									</span>
 									<span class="nav-link-title">
@@ -71,6 +75,7 @@
 									</span>
 								</a>
 							</li>
+
 							<?php $this->load->view("layout/headerLayout/adminMenu"); ?>
 						</ul>
 					</div>
