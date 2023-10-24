@@ -139,10 +139,10 @@
     });
 
     $(".btn-pp1").on("click", function () {
-        location.href = "<?php echo site_url("student-report-pp1/"); ?>" + $(this).attr('id');
+        location.href = "<?php echo site_url("student-report-pt01/"); ?>" + $(this).attr('id');
     });
     
         $(".btn-pp2").on("click", function () {
-        location.href = "<?php echo site_url("student-report-pp2/"); ?>" + $(this).attr('id');
+        location.href = "<?php echo site_url("student-report-pt02/"); ?>" + $(this).attr('id');
     });
 </script>

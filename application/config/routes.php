@@ -75,7 +75,7 @@ $route['student-edit-form/(:num)']='StudentController/studentEditForm/$1';
 
 $route['student-promote']='StudentController/studentPromoteIndex';
 $route['student-report']='StudentController/studentReportIndex';
-$route['student-report-pp2/(:num)']='StudentController/studentPP2Report/$1';
+$route['student-report-pt02/(:num)']='StudentController/studentPT02Report/$1';
 
 $route['school'] = 'SchoolController/schoolIndex';
 $route['rooms']='SchoolController/roomsIndex';

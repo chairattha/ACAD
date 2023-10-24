@@ -163,7 +163,7 @@ class StudentController extends CI_Controller
         }
     }
     
-    public function studentPP2Report($std_id)
+    public function studentPT02Report($std_id)
     {
         $data["row"] = $this->StudentModel->get_student_by_stdid($std_id);
         
@@ -174,6 +174,6 @@ class StudentController extends CI_Controller
                      ตำบลคลองสอง อำเภอคลองหลวง จังหวัดปทุมธานี";
         $content3 = "Test part1 <hr>";
         $data["myContent"] = array($content1,$content2,$content3);
-        $this->load->view("student/studentreportPP2", $data);
+        $this->load->view("student/report/studentreportPT02", $data);
     }
 }
