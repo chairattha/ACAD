@@ -162,4 +162,18 @@ class StudentController extends CI_Controller
             echo "ลบข้อมูลสำเร็จ !";
         }
     }
+    
+    public function studentPP2Report($std_id)
+    {
+        $data["row"] = $this->StudentModel->get_student_by_stdid($std_id);
+        
+        //MPDF
+        $data["title"] = "Title";
+        $content1 = "Test part1 <hr>";
+        $content2 = "<p>Test part2 </p>";
+        $data["myContent"] = array($content1,$content2);
+        $this->load->view("layout/header");
+        $this->load->view("student/studentreportPP2", $data);
+        $this->load->view("layout/footer");
+    }
 }
