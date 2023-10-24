@@ -1,6 +1,6 @@
 <?php
 
-require_once APPPATH . './third_party/autoload.php';
+require_once APPPATH . '../vendor/autoload.php';
 
 $defaultConfig = (new Mpdf\Config\ConfigVariables())->getDefaults();
 $fontDirs = $defaultConfig['fontDir'];
