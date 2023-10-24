@@ -100,10 +100,10 @@
                                     </td>
                                     <td class='text-center'>
                                         <button class="btn btn-pp1 d-none d-sm-inline-block" id="<?php echo $s["std_id"] ?>">
-                                            <i class='ti ti-file'></i>ปพ.1
+                                            <i class='ti ti-file'></i>ปถ.01
                                         </button>
                                         <buttona class="btn btn-pp2 d-none d-sm-inline-block" id="<?php echo $s["std_id"] ?>">
-                                            <i class='ti ti-file'></i>ปพ.2
+                                            <i class='ti ti-file'></i>ปถ.02
                                             </button>
                                     </td>
                                 </tr>

@@ -168,12 +168,12 @@ class StudentController extends CI_Controller
         $data["row"] = $this->StudentModel->get_student_by_stdid($std_id);
         
         //MPDF
-        $data["title"] = "Title";
-        $content1 = "Test part1 <hr>";
-        $content2 = "<p>Test part2 </p>";
-        $data["myContent"] = array($content1,$content2);
-        $this->load->view("layout/header");
+        $data["title"] = "รายงาน ปพ.2 : ".$data["row"]["fullname"];
+        $content1 = "ใบรับรองผลการเรียน<br>";
+        $content2 = "โรงเรียนเทศบาลท่าโขลง ๑ สังกัด เทศบาลเมืองท่าโขลง <br>
+                     ตำบลคลองสอง อำเภอคลองหลวง จังหวัดปทุมธานี";
+        $content3 = "Test part1 <hr>";
+        $data["myContent"] = array($content1,$content2,$content3);
         $this->load->view("student/studentreportPP2", $data);
-        $this->load->view("layout/footer");
     }
 }
